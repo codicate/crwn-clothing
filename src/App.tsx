@@ -3,28 +3,20 @@ import './App.scss';
 
 import useEventListener from 'hooks/useEventListener';
 
+import Searchbar from 'components/Searchbar';
+
 function App() {
-  const [counter, setCounter] = useState(0);
-  const button = useRef(null);
-
-  const incrementFn = () => {
-    console.log('hello');
-    setCounter(counter => counter + 1);
-  };
-
-  useEventListener(button, 'click', incrementFn);
+  const [input, setInput] = useState('');
 
   return <>
 
     <div>
-      Counter: {counter}
+      Input: {input}
     </div>
 
-    <button
-      ref={button}
-    >
-      Increment
-    </button>
+    <Searchbar
+      returnInput={(input) => setInput(input)}
+    />
 
   </>;
 }
