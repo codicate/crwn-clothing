@@ -1,8 +1,15 @@
 import { useEffect, useRef } from 'react';
-import getRefCurrent from 'functions/getRefCurrent';
+import getRefCurrent, { ref } from 'functions/getRefCurrent';
 
-const useEventListener = (eventTarget, eventType, handler, options = {}) => {
-  const savedHandler = useRef(null);
+type listener = (e?: Event) => void;
+
+const useEventListener = (
+  eventTarget: ref | HTMLElement,
+  eventType: string,
+  handler: listener,
+  options = {}
+) => {
+  const savedHandler: { current: null | listener; } = useRef(null);
   useEffect(() => {
     savedHandler.current = handler;
   }, [handler]);
@@ -11,7 +18,7 @@ const useEventListener = (eventTarget, eventType, handler, options = {}) => {
     const element = getRefCurrent(eventTarget);
     if (!element || !element.addEventListener) return;
 
-    const listener = (event) => savedHandler.current(event);
+    const listener = (event: Event) => (savedHandler.current as listener)(event);
     element.addEventListener(eventType, listener, options);
 
     return () => element.removeEventListener(eventType, listener, options);
