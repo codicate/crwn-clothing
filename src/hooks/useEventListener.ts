@@ -1,14 +1,16 @@
 import { useEffect, useRef } from 'react';
-import getRefCurrent, { ref } from 'functions/getRefCurrent';
+import getRefCurrent from 'functions/getRefCurrent';
 
 type listener = (e?: Event) => void;
 
 const useEventListener = (
-  eventTarget: ref | HTMLElement,
+  eventTarget: React.MutableRefObject<null> | HTMLElement,
   eventType: string,
   handler: listener,
   options = {}
+
 ) => {
+
   const savedHandler: { current: null | listener; } = useRef(null);
   useEffect(() => {
     savedHandler.current = handler;

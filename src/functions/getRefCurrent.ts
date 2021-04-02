@@ -1,10 +1,6 @@
-export interface ref {
-  current: HTMLElement
-}
-
-const getRefCurrent = (ref: ref | HTMLElement) => {
-  return (ref as ref).current !== undefined
-    ? (ref as ref).current
+const getRefCurrent = (ref: React.MutableRefObject<null> | HTMLElement) => {
+  return (ref as React.MutableRefObject<null>).current !== undefined
+    ? (ref as React.MutableRefObject<null>).current
     : ref as HTMLElement;
 };
 
