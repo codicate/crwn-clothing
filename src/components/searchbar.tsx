@@ -1,7 +1,9 @@
 import { useState, useRef } from 'react';
 
-export default function Searchbar(
-  { returnInput }: { returnInput: (input: string) => void; }
+export default function Searchbar({ returnInput }
+  : {
+    returnInput: (input: string) => void;
+  }
 ) {
   const [input, setInput] = useState('');
   const searchbar = useRef<HTMLInputElement>(null);
@@ -36,5 +38,3 @@ export default function Searchbar(
     </div>
   );
 }
-
-export { };
