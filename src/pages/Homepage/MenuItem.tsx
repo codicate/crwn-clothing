@@ -1,5 +1,5 @@
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import styles from 'components/MenuItem.module.scss';
+import styles from 'pages/Homepage/MenuItem.module.scss';
 
 const MenuItem = ({ title, imageUrl, size, history, match }:
   {

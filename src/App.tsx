@@ -1,8 +1,8 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import 'App.scss';
 
-import Homepage from 'pages/Homepage';
-import Shop from 'pages/Shop';
+import Homepage from 'pages/Homepage/Homepage';
+import Shop from 'pages/Shop/Shop';
 import Item from 'pages/Item';
 
 function App() {

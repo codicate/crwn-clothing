@@ -1,6 +1,6 @@
-import styles from 'pages/Homepage.module.scss';
+import styles from 'pages/Homepage/Homepage.module.scss';
 
-import Directory from 'components/Directory';
+import Directory from 'pages/Homepage/Directory';
 
 export default function HomePage() {
   return (

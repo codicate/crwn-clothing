@@ -1,6 +1,6 @@
-import styles from 'components/Directory.module.scss';
+import styles from 'pages/Homepage/Directory.module.scss';
 import DIRECTORY_DATA from 'data/directory.json';
-import MenuItem from 'components/MenuItem';
+import MenuItem from 'pages/Homepage/MenuItem';
 
 const Directory = () => (
   <div className={styles.directoryMenu}>

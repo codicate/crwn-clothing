@@ -1,4 +1,4 @@
-import styles from 'pages/Shop.module.scss';
+import styles from 'pages/Shop/Shop.module.scss';
 import INVENTORY_DATA from 'data/inventory.json';
 
 import React from 'react';
