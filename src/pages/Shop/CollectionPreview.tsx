@@ -4,12 +4,12 @@ import CollectionItem from 'pages/Shop/CollectionItem';
 const CollectionPreview = ({ title, items }:
   {
     title: string;
-    items: [{
+    items: {
       id: number;
       name: string;
       price: number;
       imageUrl: string;
-    }];
+    }[];
   }
 ) => (
   <div className={styles.collectionPreview}>
