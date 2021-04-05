@@ -1,13 +1,20 @@
 import styles from 'components/Button.module.scss';
 
-const Button = ({ type, children = '' }: {
-  type: string;
+const Button = ({ children = '', color, ...props }: {
   children?: React.ReactNode;
+  color?: string;
+  type?: 'submit' | 'reset' | 'button';
 }) => {
   return (
-    <div>
-
-    </div>
+    <button
+      style={
+        color ? { backgroundColor: color } : {}
+      }
+      className={styles.button}
+      {...props}
+    >
+      {children}
+    </button>
   );
 };
 
