@@ -3,7 +3,7 @@ import 'App.scss';
 
 import Homepage from 'pages/Homepage/Homepage';
 import Shop from 'pages/Shop/Shop';
-import Item from 'pages/Item';
+import Item from 'pages/Items/Item';
 
 function App() {
   return (
