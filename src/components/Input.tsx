@@ -1,26 +1,31 @@
 import styles from 'components/Input.module.scss';
 
 const Input = ({
-  required = false,
-  name,
-  type = 'text',
-  label = '',
-  value = '',
-  changeHandler = () => { }
+  label,
+  changeHandler = () => { },
+  ...props
 }: {
-  required?: boolean;
-  name: string;
-  type?: string;
   label?: string;
-  value: string;
   changeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  required?: boolean;
+  name?: string;
+  type?: string,
+  value?: string;
 }) => {
   return (
-    <div>
+    <div className={styles.group}>
       <input
         className={styles.input}
         onChange={changeHandler}
+        {...props}
       />
+      {label && (
+        <label
+          className={`${props.value ? styles.shrink : ''}`}
+        >
+          {label}
+        </label>
+      )}
     </div>
   );
 };
