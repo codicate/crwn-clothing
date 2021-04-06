@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -13,11 +15,55 @@ const config = {
 
 firebase.initializeApp(config);
 
+export default firebase;
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
+const provider = new firebase.auth
+  .GoogleAuthProvider()
+  .setCustomParameters({ prompt: 'select_account' });
+
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
-export default firebase;
+
+export const useAuthUser = () => {
+  const [user, setUser] = useState<null | firebase.User>(null);
+
+  useEffect(() => {
+    const unsubFromAuth = auth.onAuthStateChanged(newUser => {
+      newUser ? setUser(newUser) : setUser(null);
+    });
+    return () => unsubFromAuth();
+  }, []);
+
+  return user;
+};
+
+
+export const createAuthUserDoc = async (
+  user: firebase.User,
+  data: []
+) => {
+  if (!user) return;
+
+  const userRef = firestore.doc(`users/${user.uid}`);
+  const userSnapShot = await userRef.get();
+
+  if (!userSnapShot.exists) {
+    const { displayName, email } = user;
+    const joinedAt = new Date();
+
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        joinedAt,
+        ...data
+      });
+    } catch (error) {
+      console.log('Error creating user:', error.message);
+    }
+  }
+
+  return userRef;
+};

@@ -1,5 +1,5 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import useFirebaseAuthUser from 'hooks/useFirebaseAuthUser';
+import { useAuthUser } from 'utils/firebase';
 
 import 'App.scss';
 
@@ -11,7 +11,7 @@ import Item from 'pages/Items/Item';
 
 
 function App() {
-  const user = useFirebaseAuthUser();
+  const user = useAuthUser();
   console.log('inside app', user);
 
   return <>
