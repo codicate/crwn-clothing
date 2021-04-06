@@ -1,4 +1,6 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import useFirebaseAuthUser from 'hooks/useFirebaseAuthUser';
+
 import 'App.scss';
 
 import Header from 'pages/Header/Header';
@@ -7,7 +9,11 @@ import Shop from 'pages/Shop/Shop';
 import Account from 'pages/Account/Account';
 import Item from 'pages/Items/Item';
 
+
 function App() {
+  const user = useFirebaseAuthUser();
+  console.log('inside app', user);
+
   return <>
     <BrowserRouter>
       <Header />

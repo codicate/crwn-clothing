@@ -1,5 +1,5 @@
-import styles from 'pages/Account/SignIn.module.scss';
 import { FormEvent, useState } from 'react';
+import styles from 'pages/Account/SignIn.module.scss';
 
 import { signInWithGoogle } from 'utils/firebase';
 import Input from 'components/Input';
