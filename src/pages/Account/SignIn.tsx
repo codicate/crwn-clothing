@@ -62,6 +62,7 @@ const SignIn = () => {
             Submit
           </Button>
           <Button
+            styleOption='google'
             onClick={signInWithGoogle}
           >
             Sign in with Google

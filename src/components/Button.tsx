@@ -3,15 +3,17 @@ import styles from 'components/Button.module.scss';
 const Button = ({
   children = '',
   type = 'button',
+  styleOption,
   ...props
 }: {
   children?: React.ReactNode;
   type?: 'submit' | 'reset' | 'button';
+  styleOption?: string;
   onClick?: () => {};
 }) => {
   return (
     <button
-      className={styles.button}
+      className={`${styles.button} ${styleOption ? styles[styleOption] : ''}`}
       type={type}
       {...props}
     >
