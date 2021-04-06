@@ -1,6 +1,7 @@
 import styles from 'pages/Account/SignIn.module.scss';
 import { FormEvent, useState } from 'react';
 
+import { signInWithGoogle } from 'utils/firebase';
 import Input from 'components/Input';
 import Button from 'components/Button';
 
@@ -10,8 +11,9 @@ const SignIn = () => {
     password: ''
   });
 
-  const handleSubmit = (e: FormEvent) => {
+  const submitHandler = (e: FormEvent) => {
     e.preventDefault();
+    console.log('submit');
 
     setInput({
       email: '',
@@ -36,7 +38,7 @@ const SignIn = () => {
       <span className={styles.title}>
         Sign in with your email and password
       </span>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={submitHandler}>
         <Input
           required
           name='email'
@@ -59,7 +61,9 @@ const SignIn = () => {
           >
             Submit
           </Button>
-          <Button>
+          <Button
+            onClick={signInWithGoogle}
+          >
             Sign in with Google
           </Button>
         </div>
