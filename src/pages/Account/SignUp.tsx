@@ -40,33 +40,41 @@ const SignUp = () => {
       <form onSubmit={submitHandler}>
         <Input
           required
-          name='email'
+          type='text'
+          name='displayName'
+          label='Display Name'
+          value={input.displayName}
+          changeHandler={changeHandler}
+        />
+        <Input
+          required
           type='email'
+          name='email'
           label='email'
           value={input.email}
           changeHandler={changeHandler}
         />
         <Input
           required
-          name='password'
           type='password'
+          name='password'
           label='password'
           value={input.password}
           changeHandler={changeHandler}
         />
-        <div className={styles.buttons}>
-          <Button
-            type='submit'
-          >
-            Submit
-          </Button>
-          <Button
-            styleOption='google'
-            onClick={signInWithGoogle}
-          >
-            Sign in with Google
-          </Button>
-        </div>
+        <Input
+          required
+          type='password'
+          name='confirmPassword'
+          label='Confirm Password'
+          value={input.confirmPassword}
+          changeHandler={changeHandler}
+        />
+        <Button
+          type='submit'
+        >
+          Sign Up
+        </Button>
       </form>
     </div>
   );
