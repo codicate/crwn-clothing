@@ -26,23 +26,9 @@ const provider = new firebase.auth
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 
-export const useAuthUser = () => {
-  const [user, setUser] = useState<null | firebase.User>(null);
-
-  useEffect(() => {
-    const unsubFromAuth = auth.onAuthStateChanged(newUser => {
-      newUser ? setUser(newUser) : setUser(null);
-    });
-    return () => unsubFromAuth();
-  }, []);
-
-  return user;
-};
-
-
 export const createAuthUserDoc = async (
   user: firebase.User,
-  data: []
+  data?: []
 ) => {
   if (!user) return;
 
@@ -51,7 +37,7 @@ export const createAuthUserDoc = async (
 
   if (!userSnapShot.exists) {
     const { displayName, email } = user;
-    const joinedAt = new Date();
+    const joinedAt = new Date().getTime();
 
     try {
       await userRef.set({
@@ -66,4 +52,28 @@ export const createAuthUserDoc = async (
   }
 
   return userRef;
+};
+
+export const useAuthUser = () => {
+  const [user, setUser] = useState<object | null>(null);
+
+  useEffect(() => {
+    const unsubFromAuth = auth.onAuthStateChanged(async newUser => {
+      if (newUser) {
+        const userRef = await createAuthUserDoc(newUser);
+
+        userRef && userRef.onSnapshot(userSnapShot => {
+          setUser({
+            id: userSnapShot.id,
+            ...userSnapShot.data()
+          });
+        });
+      } else {
+        setUser(null);
+      }
+    });
+    return () => unsubFromAuth();
+  }, []);
+
+  return user;
 };
