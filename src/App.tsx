@@ -16,7 +16,7 @@ function App() {
 
   return <>
     <BrowserRouter>
-      <Header />
+      <Header user={user} />
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route exact path="/shop" component={Shop} />
