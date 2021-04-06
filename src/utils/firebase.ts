@@ -37,7 +37,7 @@ export const createAuthUserDoc = async (
 
   if (!userSnapShot.exists) {
     const { displayName, email } = user;
-    const joinedAt = new Date().getTime();
+    const joinedAt = new Date();
 
     try {
       await userRef.set({
@@ -55,7 +55,7 @@ export const createAuthUserDoc = async (
 };
 
 export const useAuthUser = () => {
-  const [user, setUser] = useState<object | null>(null);
+  const [user, setUser] = useState<{ id: string; } | null>(null);
 
   useEffect(() => {
     const unsubFromAuth = auth.onAuthStateChanged(async newUser => {
