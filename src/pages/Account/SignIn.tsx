@@ -30,8 +30,12 @@ const SignIn = () => {
 
   return (
     <div className={styles.signIn}>
-      <h2>I already have an account</h2>
-      <span>Sign in with your email and password</span>
+      <h2 className={styles.title}>
+        I already have an account
+      </h2>
+      <span className={styles.title}>
+        Sign in with your email and password
+      </span>
       <form onSubmit={handleSubmit}>
         <Input
           required
@@ -49,11 +53,16 @@ const SignIn = () => {
           value={input.password}
           changeHandler={changeHandler}
         />
-        <Button
-          type='submit'
-        >
-          Submit
-        </Button>
+        <div className={styles.buttons}>
+          <Button
+            type='submit'
+          >
+            Submit
+          </Button>
+          <Button>
+            Sign in with Google
+          </Button>
+        </div>
       </form>
     </div>
   );
