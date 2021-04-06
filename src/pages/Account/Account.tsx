@@ -5,7 +5,7 @@ import SignUp from 'pages/Account/SignUp';
 
 const Account = () => {
   return (
-    <div>
+    <div className={styles.account}>
       <SignIn />
       <SignUp />
     </div>

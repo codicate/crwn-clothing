@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import styles from 'pages/Account/SignIn.module.scss';
+import styles from 'pages/Account/Account.module.scss';
 
 import { signInWithGoogle } from 'utils/firebase';
 import Input from 'components/Input';
@@ -31,7 +31,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className={styles.signIn}>
+    <div className={styles.container}>
       <h2 className={styles.title}>
         I already have an account
       </h2>
