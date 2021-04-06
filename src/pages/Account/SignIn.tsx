@@ -6,19 +6,16 @@ import Input from 'components/Input';
 import Button from 'components/Button';
 
 const SignIn = () => {
-  const [input, setInput] = useState({
+  const defaultInput = {
     email: '',
     password: ''
-  });
+  };
+
+  const [input, setInput] = useState(defaultInput);
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
-    console.log('submit');
-
-    setInput({
-      email: '',
-      password: ''
-    });
+    setInput(defaultInput);
   };
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
