@@ -1,4 +1,5 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useRef } from 'react';
+import { Switch, Route, withRouter, RouteComponentProps } from "react-router-dom";
 import { useAuthUser } from 'utils/firebase';
 
 import 'App.scss';
@@ -9,22 +10,24 @@ import Shop from 'pages/Shop/Shop';
 import Account from 'pages/Account/Account';
 import Item from 'pages/Items/Item';
 
-
-function App() {
+const App = ({ history }:
+  {} & RouteComponentProps
+) => {
   const user = useAuthUser();
   console.log('inside app', user);
+  const defaultPath = useRef(history.location.pathname);
 
-  return <>
-    <BrowserRouter>
-      <Header user={user} />
+  return (
+    <>
+      <Header user={user} defaultPath={defaultPath.current} />
       <Switch>
-        <Route exact path="/" component={Homepage} />
-        <Route exact path="/shop" component={Shop} />
-        <Route exact path="/account" component={Account} />
-        <Route path="/item/:itemName" component={Item} />
+        <Route exact path={`${defaultPath.current}/`} component={Homepage} />
+        <Route exact path={`${defaultPath.current}/shop`} component={Shop} />
+        <Route exact path={`${defaultPath.current}/account`} component={Account} />
+        <Route path={`${defaultPath.current}/item/:itemName`} component={Item} />
       </Switch>
-    </BrowserRouter>
-  </>;
-}
+    </>
+  );
+};
 
-export default App;
+export default withRouter(App);
