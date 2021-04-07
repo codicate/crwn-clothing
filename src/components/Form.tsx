@@ -1,79 +1,49 @@
-// import { FormEvent, useState } from 'react';
-// import Input from 'components/Input';
-// import Button from 'components/Button';
+import { FormEvent, useState } from 'react';
+import Input from 'components/Input';
 
-// type inputItem = {
-//   name: string;
-//   value: any;
-//   type?: string;
-//   label?: string;
-//   required?: boolean;
-// }
+const Form = ({ submitFn, inputItems, children }:
+  {
+    submitFn?: () => void;
+    children?: React.ReactNode;
+    inputItems: {
+      name: string;
+      value: any;
+      type?: string;
+      label?: string;
+      required?: boolean;
+    }[];
+  }
+) => {
+  const [input, setInput] = useState(inputItems);
 
-// const Form = ({ inputItems }:
-//   {
-//     inputItems: inputItem[]
-//   }
-// ) => {
-//   const [input, setInput] = useState(inputItems);
+  const submitHandler = (e: FormEvent) => {
+    e.preventDefault();
+    submitFn && submitFn();
+    setInput(inputItems);
+  };
 
-//   const submitHandler = (e: FormEvent) => {
-//     e.preventDefault();
-//     setInput(inputItems);
-//   };
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
 
-//   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const { name, value } = e.target as HTMLInputElement;
+    setInput({
+      ...input,
+      [name]: value
+    });
+  };
 
-//     setInput({
-//       ...input,
-//       [name]: value
-//     });
-//   };
+  return (
+    <form onSubmit={submitHandler}>
+      {
+        inputItems.map(item => (
+          <Input
+            changeHandler={changeHandler}
+            {...item}
+          />
+        ))
+      }
+      {children}
+    </form>
+  );
+};
 
-//   return (
-//     <form onSubmit={submitHandler}>
-//       <Input
-//         required
-//         type='text'
-//         name='displayName'
-//         label='Display Name'
-//         value={input.displayName}
-//         changeHandler={changeHandler}
-//       />
-//       <Input
-//         required
-//         type='email'
-//         name='email'
-//         label='email'
-//         value={input.email}
-//         changeHandler={changeHandler}
-//       />
-//       <Input
-//         required
-//         type='password'
-//         name='password'
-//         label='password'
-//         value={input.password}
-//         changeHandler={changeHandler}
-//       />
-//       <Input
-//         required
-//         type='password'
-//         name='confirmPassword'
-//         label='Confirm Password'
-//         value={input.confirmPassword}
-//         changeHandler={changeHandler}
-//       />
-//       <Button
-//         type='submit'
-//       >
-//         Sign Up
-//         </Button>
-//     </form>
-//   );
-// };
-
-// export default Form;
-
-export { };
+export default Form;
