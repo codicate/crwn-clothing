@@ -1,7 +1,6 @@
 import { FormEvent, useState } from 'react';
 import styles from 'pages/Account/Account.module.scss';
 
-import { signInWithGoogle } from 'utils/firebase';
 import Input from 'components/Input';
 import Button from 'components/Button';
 
