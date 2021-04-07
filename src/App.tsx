@@ -15,16 +15,17 @@ const App = ({ history }:
 ) => {
   const user = useAuthUser();
   console.log('inside app', user);
-  const defaultPath = useRef(history.location.pathname);
+  
+  const url = useRef(history.location.pathname);
 
   return (
     <>
-      <Header user={user} defaultPath={defaultPath.current} />
+      <Header user={user} url={url.current} />
       <Switch>
-        <Route exact path={`${defaultPath.current}/`} component={Homepage} />
-        <Route exact path={`${defaultPath.current}/shop`} component={Shop} />
-        <Route exact path={`${defaultPath.current}/account`} component={Account} />
-        <Route path={`${defaultPath.current}/item/:itemName`} component={Item} />
+        <Route exact path={`${url.current}`} component={Homepage} />
+        <Route exact path={`${url.current}shop`} component={Shop} />
+        <Route exact path={`${url.current}account`} component={Account} />
+        <Route path={`${url.current}item/:itemName`} component={Item} />
       </Switch>
     </>
   );

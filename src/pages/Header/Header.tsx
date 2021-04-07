@@ -4,23 +4,22 @@ import styles from 'pages/Header/Header.module.scss';
 
 import { ReactComponent as Logo } from 'assets/crown.svg';
 
-const Header = ({ user, defaultPath }:
+const Header = ({ user, url }:
   {
     user: object | null;
-    defaultPath: string;
+    url: string;
   }
 ) => {
   return (
     <div className={styles.header}>
-      {console.log(defaultPath)}
-      <Link to={`${defaultPath}`} className={styles.logoContainer}>
+      <Link to={`${url}`} className={styles.logoContainer}>
         <Logo />
       </Link>
       <div className={styles.options}>
-        <Link to={`${defaultPath}/shop`}>
+        <Link to={`${url}shop`}>
           SHOP
         </Link>
-        <Link to={`${defaultPath}/shop`}>
+        <Link to={`${url}shop`}>
           CONTACT
         </Link>
         {
@@ -31,7 +30,7 @@ const Header = ({ user, defaultPath }:
               SIGN OUT
             </div>
           ) : (
-            <Link to={`${defaultPath}/account`}>
+            <Link to={`${url}account`}>
               SIGN IN
             </Link>
           )
