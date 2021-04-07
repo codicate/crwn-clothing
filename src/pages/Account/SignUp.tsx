@@ -1,7 +1,6 @@
-import { FormEvent, useState } from 'react';
 import styles from 'pages/Account/Account.module.scss';
 
-import Input from 'components/Input';
+import Form from 'components/Form';
 import Button from 'components/Button';
 
 const SignUp = () => {
