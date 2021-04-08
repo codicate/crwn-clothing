@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Switch, Route, withRouter, RouteComponentProps } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 import { useAuthUser } from 'utils/firebase';
 
 import 'App.scss';
@@ -10,13 +10,12 @@ import Shop from 'pages/Shop/Shop';
 import Account from 'pages/Account/Account';
 import Item from 'pages/Items/Item';
 
-const App = ({ history }:
-  {} & RouteComponentProps
-) => {
+const App = () => {
   const user = useAuthUser();
-  console.log('inside app', user);
-  
-  const url = useRef(history.location.pathname);
+  console.log('inside app:', user);
+
+  const location = useLocation();
+  const url = useRef(location.pathname);
 
   return (
     <>
@@ -31,4 +30,4 @@ const App = ({ history }:
   );
 };
 
-export default withRouter(App);
+export default App;
