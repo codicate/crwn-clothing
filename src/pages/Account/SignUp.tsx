@@ -1,4 +1,4 @@
-import { auth, createAuthUserDoc } from 'utils/firebase';
+import { auth } from 'utils/firebase';
 import styles from 'pages/Account/Account.module.scss';
 
 import Form from 'components/Form';
@@ -13,6 +13,7 @@ const SignUp = () => {
       <span className={styles.title}>
         Sign in with your email and password
       </span>
+
       <Form
         inputItems={[
           ['displayName', 'Display Name',
@@ -39,11 +40,7 @@ const SignUp = () => {
           }
 
           try {
-            const { user } = await auth.createUserWithEmailAndPassword(email, password);
-            if (!user) throw new Error('Failed to create user');
-
-            await createAuthUserDoc(user, { displayName });
-
+            await auth.createUserWithEmailAndPassword(email, password);
           } catch (err) {
             console.error(err);
           }

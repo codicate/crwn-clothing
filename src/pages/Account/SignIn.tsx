@@ -1,6 +1,6 @@
 import styles from 'pages/Account/Account.module.scss';
 
-import { signInWithGoogle } from 'utils/firebase';
+import { auth, signInWithGoogle } from 'utils/firebase';
 import Form from 'components/Form';
 import Button from 'components/Button';
 
@@ -22,6 +22,10 @@ const SignIn = () => {
             { type: 'password', required: true }
           ]
         ]}
+        // submitFn={async () => {
+
+        //   auth.signInWithEmailAndPassword(email, password)
+        // }}
       >
         <div className={styles.buttons}>
           <Button

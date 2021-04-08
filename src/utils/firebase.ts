@@ -51,7 +51,6 @@ export const createAuthUserDoc = async (
     }
   }
 
-  console.log('successful', userRef);
   return userRef;
 };
 
