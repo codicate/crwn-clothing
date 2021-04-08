@@ -3,7 +3,7 @@ import Input from 'components/Input';
 
 const Form = ({ submitFn, children, inputItems }:
   {
-    submitFn?: (inputItems: {}) => void | Promise<void>;
+    submitFn?: (inputItems: {}) => void | boolean | Promise<boolean | undefined>;
     children?: React.ReactNode;
     inputItems: [
       string, string?,
@@ -31,8 +31,12 @@ const Form = ({ submitFn, children, inputItems }:
 
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
-    submitFn && await submitFn(input);
-    setInput(defaultItems);
+
+    const reset = submitFn
+      ? await submitFn(input)
+      : true;
+
+    reset && setInput(defaultItems);
   };
 
   return (

@@ -1,4 +1,4 @@
-import { auth } from 'utils/firebase';
+import { auth, createAuthUserDoc } from 'utils/firebase';
 import styles from 'pages/Account/Account.module.scss';
 
 import Form from 'components/Form';
@@ -8,10 +8,10 @@ const SignUp = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>
-        I already have an account
+        I do not have a account
       </h2>
       <span className={styles.title}>
-        Sign in with your email and password
+        Sign up with your email and password
       </span>
 
       <Form
@@ -30,17 +30,23 @@ const SignUp = () => {
           ]
         ]}
         submitFn={async ({ displayName, email, password, confirmPassword }:
-          {
-            [name: string]: string;
-          }
+          { [name: string]: string; }
         ) => {
+          if (password.length < 6) {
+            alert("Passwords should be at least 6 characters");
+            return;
+          }
+
           if (password !== confirmPassword) {
             alert("Passwords don't match");
             return;
           }
 
           try {
-            await auth.createUserWithEmailAndPassword(email, password);
+            const { user } = await auth.createUserWithEmailAndPassword(email, password);
+            user && await createAuthUserDoc(user, { displayName });
+            return true;
+
           } catch (err) {
             console.error(err);
           }

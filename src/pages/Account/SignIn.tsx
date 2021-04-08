@@ -13,6 +13,7 @@ const SignIn = () => {
       <span className={styles.title}>
         Sign in with your email and password
       </span>
+
       <Form
         inputItems={[
           ['email', 'Email',
@@ -22,10 +23,16 @@ const SignIn = () => {
             { type: 'password', required: true }
           ]
         ]}
-        // submitFn={async () => {
-
-        //   auth.signInWithEmailAndPassword(email, password)
-        // }}
+        submitFn={async ({ email, password }:
+          { [name: string]: string; }
+        ) => {
+          try {
+            await auth.signInWithEmailAndPassword(email, password);
+            return true;
+          } catch (err) {
+            console.error(err);
+          }
+        }}
       >
         <div className={styles.buttons}>
           <Button
