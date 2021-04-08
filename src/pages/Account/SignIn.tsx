@@ -2,31 +2,10 @@ import { FormEvent, useState } from 'react';
 import styles from 'pages/Account/Account.module.scss';
 
 import { signInWithGoogle } from 'utils/firebase';
-import Input from 'components/Input';
+import Form from 'components/Form';
 import Button from 'components/Button';
 
 const SignIn = () => {
-  const defaultInput = {
-    email: '',
-    password: ''
-  };
-
-  const [input, setInput] = useState(defaultInput);
-
-  const submitHandler = (e: FormEvent) => {
-    e.preventDefault();
-    setInput(defaultInput);
-  };
-
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target as HTMLInputElement;
-
-    setInput({
-      ...input,
-      [name]: value
-    });
-  };
-
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>
@@ -35,23 +14,16 @@ const SignIn = () => {
       <span className={styles.title}>
         Sign in with your email and password
       </span>
-      <form onSubmit={submitHandler}>
-        <Input
-          required
-          name='email'
-          type='email'
-          label='email'
-          value={input.email}
-          changeHandler={changeHandler}
-        />
-        <Input
-          required
-          name='password'
-          type='password'
-          label='password'
-          value={input.password}
-          changeHandler={changeHandler}
-        />
+      <Form
+        inputItems={[
+          ['email', '', 'Email',
+            { type: 'email', required: true }
+          ],
+          ['password', '', 'Password',
+            { type: 'password', required: true }
+          ]
+        ]}
+      >
         <div className={styles.buttons}>
           <Button
             type='submit'
@@ -65,8 +37,8 @@ const SignIn = () => {
             Sign in with Google
           </Button>
         </div>
-      </form>
-    </div>
+      </Form>
+    </div >
   );
 };
 

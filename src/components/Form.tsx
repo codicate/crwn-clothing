@@ -1,29 +1,35 @@
 import { FormEvent, useState } from 'react';
 import Input from 'components/Input';
 
-const Form = ({ submitFn, inputItems, children }:
+const Form = ({ submitFn, children, inputItems }:
   {
     submitFn?: () => void;
     children?: React.ReactNode;
-    inputItems: {
-      name: string;
-      value: any;
-      type?: string;
-      label?: string;
-      required?: boolean;
-    }[];
+    inputItems: [
+      string, any, string?,
+      { type?: string, required?: boolean; }?
+    ][];
   }
 ) => {
-  const [input, setInput] = useState(inputItems);
+  const defaultItems = inputItems.reduce((
+    dict: { [name: string]: any; }, item
+  ) => {
+    dict[item[0]] = item[1];
+    return dict;
+  }, {});
+
+  const [input, setInput] = useState(defaultItems);
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
     submitFn && submitFn();
-    setInput(inputItems);
+    setInput(defaultItems);
   };
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    console.log(defaultItems);
+    console.log(name, value);
 
     setInput({
       ...input,
@@ -34,10 +40,14 @@ const Form = ({ submitFn, inputItems, children }:
   return (
     <form onSubmit={submitHandler}>
       {
-        inputItems.map(item => (
+        inputItems.map((item, idx) => (
           <Input
+            key={idx}
             changeHandler={changeHandler}
-            {...item}
+            name={item[0]}
+            value={input[item[0]]}
+            label={item[2]}
+            {...item[3]}
           />
         ))
       }
