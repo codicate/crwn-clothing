@@ -1,4 +1,3 @@
-import { FormEvent, useState } from 'react';
 import styles from 'pages/Account/Account.module.scss';
 
 import { signInWithGoogle } from 'utils/firebase';
@@ -16,10 +15,10 @@ const SignIn = () => {
       </span>
       <Form
         inputItems={[
-          ['email', '', 'Email',
+          ['email', 'Email',
             { type: 'email', required: true }
           ],
-          ['password', '', 'Password',
+          ['password', 'Password',
             { type: 'password', required: true }
           ]
         ]}

@@ -1,3 +1,4 @@
+import { auth, createAuthUserDoc } from 'utils/firebase';
 import styles from 'pages/Account/Account.module.scss';
 
 import Form from 'components/Form';
@@ -14,19 +15,39 @@ const SignUp = () => {
       </span>
       <Form
         inputItems={[
-          ['displayName', '', 'Display Name',
+          ['displayName', 'Display Name',
             { required: true }
           ],
-          ['email', '', 'Email',
+          ['email', 'Email',
             { type: 'email', required: true }
           ],
-          ['password', '', 'Password',
+          ['password', 'Password',
             { type: 'password', required: true }
           ],
-          ['confirmPassword', '', 'Confirm Password',
+          ['confirmPassword', 'Confirm Password',
             { type: 'password', required: true }
           ]
         ]}
+        submitFn={async ({ displayName, email, password, confirmPassword }:
+          {
+            [name: string]: string;
+          }
+        ) => {
+          if (password !== confirmPassword) {
+            alert("Passwords don't match");
+            return;
+          }
+
+          try {
+            const { user } = await auth.createUserWithEmailAndPassword(email, password);
+            if (!user) throw new Error('Failed to create user');
+
+            await createAuthUserDoc(user, { displayName });
+
+          } catch (err) {
+            console.error(err);
+          }
+        }}
       >
         <Button
           type='submit'

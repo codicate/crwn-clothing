@@ -28,7 +28,7 @@ export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 export const createAuthUserDoc = async (
   user: firebase.User,
-  data?: []
+  data?: {}
 ) => {
   if (!user) return;
 
@@ -46,13 +46,15 @@ export const createAuthUserDoc = async (
         joinedAt,
         ...data
       });
-    } catch (error) {
-      console.log('Error creating user:', error.message);
+    } catch (err) {
+      console.error('Error creating user:', err.message);
     }
   }
 
+  console.log('successful', userRef);
   return userRef;
 };
+
 
 export const useAuthUser = () => {
   const [user, setUser] = useState<{ id: string; } | null>(null);
