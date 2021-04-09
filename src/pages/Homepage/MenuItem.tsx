@@ -1,5 +1,6 @@
-import { useHistory, useRouteMatch } from 'react-router-dom';
 import styles from 'pages/Homepage/MenuItem.module.scss';
+
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
 const MenuItem = ({ title, imageUrl, size }:
   {

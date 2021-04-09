@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react';
+
 import Input from 'components/Input';
 
 const Form = ({ submitFn, children, inputItems }:
@@ -6,8 +7,13 @@ const Form = ({ submitFn, children, inputItems }:
     submitFn?: (inputItems: {}) => void | boolean | Promise<boolean | undefined>;
     children?: React.ReactNode;
     inputItems: [
-      string, string?,
-      { type?: string, defaultValue?: string, required?: boolean; }?
+      string, // name
+      string?, // label
+      {
+        type?: string,
+        defaultValue?: string,
+        required?: boolean;
+      }?
     ][];
   }
 ) => {

@@ -1,8 +1,9 @@
+import 'App.scss';
+
 import { useRef } from 'react';
 import { Switch, Route, useLocation } from "react-router-dom";
-import { useAuthUser } from 'utils/firebase';
 
-import 'App.scss';
+import { useAuthUser } from 'utils/firebase';
 
 import Header from 'pages/Header/Header';
 import Homepage from 'pages/Homepage/Homepage';

@@ -1,6 +1,7 @@
 import styles from 'pages/Account/Account.module.scss';
 
 import { auth, signInWithGoogle } from 'utils/firebase';
+
 import Form from 'components/Form';
 import Button from 'components/Button';
 

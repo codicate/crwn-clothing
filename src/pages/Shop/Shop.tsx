@@ -1,4 +1,5 @@
 import styles from 'pages/Shop/Shop.module.scss';
+
 import INVENTORY_DATA from 'data/inventory.json';
 import CollectionPreview from 'pages/Shop/CollectionPreview';
 

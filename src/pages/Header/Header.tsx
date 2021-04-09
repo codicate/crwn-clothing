@@ -1,6 +1,8 @@
-import { Link } from 'react-router-dom';
-import { auth } from 'utils/firebase';
 import styles from 'pages/Header/Header.module.scss';
+
+import { Link } from 'react-router-dom';
+
+import { auth } from 'utils/firebase';
 
 import { ReactComponent as Logo } from 'assets/crown.svg';
 

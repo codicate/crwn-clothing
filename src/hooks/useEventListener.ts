@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+
 import getRefCurrent from 'functions/getRefCurrent';
 
 type listener = (e?: Event) => void;

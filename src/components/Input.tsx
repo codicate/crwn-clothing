@@ -1,16 +1,16 @@
 import styles from 'components/Input.module.scss';
 
 const Input = ({
-  label,
   changeHandler = () => { },
+  label,
   ...props
 }: {
-  label?: string;
   changeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  required?: boolean;
   name?: string;
+  label?: string;
   type?: string,
   value?: string;
+  required?: boolean;
 }) => {
   return (
     <div className={styles.group}>

@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 
-export default function Searchbar({ returnInput }
-  : {
+export default function Searchbar({ returnInput }:
+  {
     returnInput: (input: string) => void;
   }
 ) {

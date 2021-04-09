@@ -4,10 +4,12 @@ const Item = ({ match }:
   {} & RouteComponentProps<{
     itemName: string;
   }>
-) => (
-  <div>
-    Hello {match.params.itemName}
-  </div>
-);
+) => {
+  return (
+    <div>
+      Hello {match.params.itemName}
+    </div>
+  );
+};
 
 export default Item;
