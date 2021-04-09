@@ -1,8 +1,10 @@
 import 'App.scss';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Switch, Route, useLocation } from "react-router-dom";
 
+import { useAppDispatch } from 'app/hooks';
+import { setCurrentUser } from 'app/user/userSlice';
 import { useAuthUser } from 'utils/firebase';
 
 import Header from 'pages/Header/Header';
@@ -12,15 +14,20 @@ import Account from 'pages/Account/Account';
 import Item from 'pages/Items/Item';
 
 const App = () => {
-  const user = useAuthUser();
-  console.log('inside app:', user);
-
   const location = useLocation();
   const url = useRef(location.pathname);
 
+  const user = useAuthUser();
+  console.log('inside app:', user);
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(setCurrentUser(user));
+  }, [dispatch, user]);
+
   return (
     <>
-      <Header user={user} url={url.current} />
+      <Header url={url.current} />
       <Switch>
         <Route exact path={`${url.current}`} component={Homepage} />
         <Route exact path={`${url.current}shop`} component={Shop} />

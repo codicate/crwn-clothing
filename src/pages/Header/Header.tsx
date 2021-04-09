@@ -2,16 +2,19 @@ import styles from 'pages/Header/Header.module.scss';
 
 import { Link } from 'react-router-dom';
 
+import { useAppSelector } from 'app/hooks';
+import { selectCurrentUser } from 'app/user/userSlice';
 import { auth } from 'utils/firebase';
 
 import { ReactComponent as Logo } from 'assets/crown.svg';
 
-const Header = ({ user, url }:
+const Header = ({ url }:
   {
-    user: object | null;
     url: string;
   }
 ) => {
+  const currentUser = useAppSelector(selectCurrentUser);
+
   return (
     <div className={styles.header}>
       <Link to={`${url}`} className={styles.logoContainer}>
@@ -25,7 +28,7 @@ const Header = ({ user, url }:
           CONTACT
         </Link>
         {
-          user ? (
+          currentUser ? (
             <div
               onClick={() => auth.signOut()}
             >
