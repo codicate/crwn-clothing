@@ -8,6 +8,8 @@ import { auth } from 'utils/firebase';
 
 import { ReactComponent as CrownIcon } from 'assets/crown.svg';
 import ShoppingIcon from 'pages/Header/ShoppingIcon';
+import CardDropdown from 'pages/Header/CartDropdown';
+import { useState } from 'react';
 
 const Header = ({ url }:
   {
@@ -16,11 +18,14 @@ const Header = ({ url }:
 ) => {
   const currentUser = useAppSelector(selectCurrentUser);
 
+  const [showCart, setShowCart] = useState(false);
+
   return (
     <div className={styles.header}>
       <Link to={`${url}`} className={styles.crownIconContainer}>
         <CrownIcon />
       </Link>
+
       <div className={styles.options}>
         <Link to={`${url}shop`}>
           SHOP
@@ -41,8 +46,13 @@ const Header = ({ url }:
             </Link>
           )
         }
-        <ShoppingIcon />
+        <ShoppingIcon
+          clickHandler={() => setShowCart(showCart => !showCart)}
+        />
       </div>
+
+      {showCart && <CardDropdown />}
+
     </div>
   );
 };

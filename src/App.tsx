@@ -18,7 +18,6 @@ const App = () => {
   const url = useRef(location.pathname);
 
   const user = useAuthUser();
-  console.log('inside app:', user);
 
   const dispatch = useAppDispatch();
   useEffect(() => {

@@ -1,5 +1,7 @@
 import styles from 'pages/Shop/CollectionItem.module.scss';
 
+import Button from 'components/Button';
+
 const CollectionItem = ({ name, price, imageUrl }:
   {
     name: string;
@@ -19,6 +21,12 @@ const CollectionItem = ({ name, price, imageUrl }:
         <span className={styles.name}>{name}</span>
         <span className={styles.price}>{price}</span>
       </div>
+      <Button
+        styleOption='inverted'
+        onClick={() => { }}
+      >
+        Add to Cart
+      </Button>
     </div>
   );
 };

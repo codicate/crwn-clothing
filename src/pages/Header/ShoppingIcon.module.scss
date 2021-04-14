@@ -13,6 +13,9 @@
   }
 
   .itemCount {
+    pointer-events: none;
+    user-select: none;
+
     position: absolute;
     font-size: 11px;
     bottom: 13px;
