@@ -1,7 +1,7 @@
 import 'App.scss';
 
 import { useEffect, useRef } from 'react';
-import { Switch, Route, useLocation } from "react-router-dom";
+import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 
 import { useAppDispatch } from 'app/hooks';
 import { setCurrentUser } from 'app/user/userSlice';
@@ -31,7 +31,13 @@ const App = () => {
       <Switch>
         <Route exact path={`${url.current}`} component={Homepage} />
         <Route exact path={`${url.current}shop`} component={Shop} />
-        <Route exact path={`${url.current}account`} component={Account} />
+        <Route exact path={`${url.current}account`} >
+          {
+            user
+              ? <Redirect to={url.current} />
+              : <Account />
+          }
+        </Route>
         <Route path={`${url.current}item/:itemName`} component={Item} />
       </Switch>
     </>
