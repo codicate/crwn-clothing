@@ -56,7 +56,7 @@ export const createAuthUserDoc = async (
 
 
 export const useAuthUser = () => {
-  const [user, setUser] = useState<{ id: string; } | null>(null);
+  const [user, setUser] = useState<firebase.User | { id: string; } | null>(null);
 
   useEffect(() => {
     const unsubFromAuth = auth.onAuthStateChanged(async newUser => {
@@ -69,9 +69,9 @@ export const useAuthUser = () => {
             ...userSnapShot.data()
           });
         });
-      } else {
-        setUser(null);
       }
+
+      setUser(newUser);
     });
     return () => unsubFromAuth();
   }, []);
