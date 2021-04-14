@@ -5,7 +5,7 @@
   justify-content: space-between;
   margin-bottom: 25px;
 
-  .logoContainer {
+  .crownIconContainer {
     height: 100%;
     width: 70px;
     padding: 25px;
@@ -19,7 +19,7 @@
     justify-content: flex-end;
 
     a,
-    div {
+    div:not(:last-child) {
       padding: 10px 15px;
       cursor: pointer;
     }

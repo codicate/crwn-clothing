@@ -6,7 +6,8 @@ import { useAppSelector } from 'app/hooks';
 import { selectCurrentUser } from 'app/user/userSlice';
 import { auth } from 'utils/firebase';
 
-import { ReactComponent as Logo } from 'assets/crown.svg';
+import { ReactComponent as CrownIcon } from 'assets/crown.svg';
+import ShoppingIcon from 'pages/Header/ShoppingIcon';
 
 const Header = ({ url }:
   {
@@ -17,8 +18,8 @@ const Header = ({ url }:
 
   return (
     <div className={styles.header}>
-      <Link to={`${url}`} className={styles.logoContainer}>
-        <Logo />
+      <Link to={`${url}`} className={styles.crownIconContainer}>
+        <CrownIcon />
       </Link>
       <div className={styles.options}>
         <Link to={`${url}shop`}>
@@ -32,7 +33,7 @@ const Header = ({ url }:
             <div
               onClick={() => auth.signOut()}
             >
-              SIGN OUT
+              SIGN OUTs
             </div>
           ) : (
             <Link to={`${url}account`}>
@@ -40,6 +41,7 @@ const Header = ({ url }:
             </Link>
           )
         }
+        <ShoppingIcon />
       </div>
     </div>
   );
