@@ -2,29 +2,36 @@ import { useEffect, useRef } from 'react';
 
 import getRefCurrent from 'functions/getRefCurrent';
 
-type listener = (e?: Event) => void;
+const useEventListener = <
+  E extends HTMLElement | Document | Window,
+  T extends keyof HTMLElementEventMap | keyof DocumentEventMap | keyof WindowEventMap,
+  >(
+    eventTarget: React.MutableRefObject<E> | E,
+    eventType: T | string,
+    listener: (
+      e:
+        T extends keyof HTMLElementEventMap ? HTMLElementEventMap[T]
+        : T extends keyof DocumentEventMap ? DocumentEventMap[T]
+        : T extends keyof WindowEventMap ? WindowEventMap[T]
+        : Event
+    ) => void,
+    options?: boolean | AddEventListenerOptions
 
-const useEventListener = (
-  eventTarget: React.MutableRefObject<null> | HTMLElement,
-  eventType: string,
-  handler: listener,
-  options = {}
+  ) => {
 
-) => {
-
-  const savedHandler: { current: null | listener; } = useRef(null);
+  const savedListener = useRef(listener);
   useEffect(() => {
-    savedHandler.current = handler;
-  }, [handler]);
+    savedListener.current = listener;
+  }, [listener]);
 
   useEffect(() => {
     const element = getRefCurrent(eventTarget);
     if (!element || !element.addEventListener) return;
 
-    const listener = (event: Event) => (savedHandler.current as listener)(event);
-    element.addEventListener(eventType, listener, options);
+    const wrappedListener: typeof savedListener.current = (e) => savedListener.current(e);
+    element.addEventListener(eventType, wrappedListener as EventListener, options);
 
-    return () => element.removeEventListener(eventType, listener, options);
+    return () => element.removeEventListener(eventType, wrappedListener as EventListener, options);
   }, [eventTarget, eventType, options]);
 };
 
