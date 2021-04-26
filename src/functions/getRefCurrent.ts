@@ -1,6 +1,6 @@
-const getRefCurrent = (ref: React.MutableRefObject<null> | HTMLElement) => {
-  return (ref as React.MutableRefObject<null>).current !== undefined
-    ? (ref as React.MutableRefObject<null>).current
+const getRefCurrent = (ref: React.MutableRefObject<HTMLElement> | HTMLElement) => {
+  return ((ref as React.MutableRefObject<HTMLElement>).current)
+    ? (ref as React.MutableRefObject<HTMLElement>).current
     : ref as HTMLElement;
 };
 
