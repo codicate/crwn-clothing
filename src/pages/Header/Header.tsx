@@ -1,6 +1,6 @@
-import styles from 'pages/Header/Header.module.scss';
-
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import styles from 'pages/Header/Header.module.scss';
 
 import { useAppSelector } from 'app/hooks';
 import { selectCurrentUser } from 'app/userSlice';
@@ -9,7 +9,6 @@ import { auth } from 'utils/firebase';
 import { ReactComponent as CrownIcon } from 'assets/crown.svg';
 import ShoppingIcon from 'pages/Header/ShoppingIcon';
 import CardDropdown from 'pages/Header/CartDropdown';
-import { useState } from 'react';
 
 const Header = ({ url }:
   {

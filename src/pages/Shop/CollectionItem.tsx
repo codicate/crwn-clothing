@@ -1,6 +1,10 @@
 import styles from 'pages/Shop/CollectionItem.module.scss';
 
+import { useAppDispatch } from 'app/hooks';
+import { setCartItems } from 'app/cartSlice';
+
 import Button from 'components/Button';
+import { useEffect } from 'react';
 
 const CollectionItem = ({ name, price, imageUrl }:
   {
@@ -9,6 +13,11 @@ const CollectionItem = ({ name, price, imageUrl }:
     imageUrl: string;
   }
 ) => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(setCartItems('hello'));
+  }, [dispatch]);
+
   return (
     <div className={styles.collectionItem}>
       <div

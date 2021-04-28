@@ -1,13 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import firebase from 'firebase/app';
 
 import { RootState } from 'app/store';
 
-export interface User {
-  currentUser: { id: string; } | firebase.User | null;
-}
+type User = { id: string; } | firebase.User | null;
 
-const initialState: User = {
+
+const initialState: {
+  currentUser: User
+} = {
   currentUser: null
 };
 
@@ -15,7 +16,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setCurrentUser: (state, action) => {
+    setCurrentUser: (state, action: PayloadAction<User>) => {
       state.currentUser = action.payload;
     }
   }
