@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 
 import { useAppDispatch } from 'app/hooks';
-import { setCurrentUser } from 'app/user/userSlice';
+import { setCurrentUser } from 'app/userSlice';
 import { useAuthUser } from 'utils/firebase';
 
 import Header from 'pages/Header/Header';

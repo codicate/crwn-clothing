@@ -3,7 +3,7 @@ import styles from 'pages/Header/Header.module.scss';
 import { Link } from 'react-router-dom';
 
 import { useAppSelector } from 'app/hooks';
-import { selectCurrentUser } from 'app/user/userSlice';
+import { selectCurrentUser } from 'app/userSlice';
 import { auth } from 'utils/firebase';
 
 import { ReactComponent as CrownIcon } from 'assets/crown.svg';
