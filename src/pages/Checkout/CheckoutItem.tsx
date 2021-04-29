@@ -1,12 +1,15 @@
 import styles from 'pages/Checkout/CheckoutItem.module.scss';
 
-import { Item } from 'app/cartSlice';
+import { useAppDispatch } from 'app/hooks';
+import { removeItem, Item } from 'app/cartSlice';
 
 const CheckoutItem = ({
-  cartItem: { name, price, imageUrl, quantity }
+  item, item: { name, price, imageUrl, quantity }
 }: {
-  cartItem: Item & { quantity: number; };
+  item: Item & { quantity: number; };
 }) => {
+  const dispatch = useAppDispatch();
+
   return (
     <div className={styles.item}>
       <div className={styles.imgContainer}>
@@ -15,7 +18,14 @@ const CheckoutItem = ({
       <span className={styles.name}>{name}</span>
       <span className={styles.quantity}>{quantity}</span>
       <span className={styles.price}>{price}</span>
-      <div className={styles.removeBtn}>&#10005;</div>
+      <div
+        className={styles.removeBtn}
+        onClick={() => {
+          dispatch(removeItem(item))
+        }}
+      >
+        &#10005;
+      </div>
     </div>
   );
 };

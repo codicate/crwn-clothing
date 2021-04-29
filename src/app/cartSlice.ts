@@ -22,16 +22,19 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    setCartItems: (state, action: PayloadAction<Item>) => {
-      const existingItem = state.cartItems.find(cartItem =>
+    addItem: (state, action: PayloadAction<Item>) => {
+      const existingItem = state.cartItems.find((cartItem) =>
         cartItem.id === action.payload.id
       );
 
       existingItem
         ? existingItem.quantity += 1
         : state.cartItems.push({ ...action.payload, quantity: 1 });
-
-      // console.table(current(state).cartItems);
+    },
+    removeItem: (state, action: PayloadAction<Item>) => {
+      state.cartItems = state.cartItems.filter((cartItem) =>
+        cartItem.id !== action.payload.id
+      );
     }
   }
 });
@@ -55,6 +58,6 @@ export const selectCartTotalPrice = createDraftSafeSelector(selectSelf, (cart) =
 );
 
 export const {
-  setCartItems
+  addItem, removeItem
 } = cartSlice.actions;
 export default cartSlice.reducer;
