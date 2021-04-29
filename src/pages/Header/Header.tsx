@@ -33,7 +33,7 @@ const Header = () => {
             <div
               onClick={() => auth.signOut()}
             >
-              SIGN OUTs
+              SIGN OUT
             </div>
           ) : (
             <Link to='/account'>

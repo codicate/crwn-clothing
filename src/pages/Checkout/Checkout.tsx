@@ -1,12 +1,13 @@
 import styles from 'pages/Checkout/Checkout.module.scss';
 
 import { useAppSelector } from 'app/hooks';
-import { selectCartItems } from 'app/cartSlice';
+import { selectCartItems, selectCartTotalPrice } from 'app/cartSlice';
 
 import CheckoutItem from 'pages/Checkout/CheckoutItem';
 
 const Checkout = () => {
   const cartItems = useAppSelector(selectCartItems);
+  const totalPrice = useAppSelector(selectCartTotalPrice);
 
   return (
     <div className={styles.page}>
@@ -30,7 +31,7 @@ const Checkout = () => {
       {cartItems.map(cartItem => (
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
-      <div className={styles.total}>TOTAL: ${3}</div>
+      <div className={styles.total}>TOTAL: ${totalPrice}</div>
     </div>
   );
 };

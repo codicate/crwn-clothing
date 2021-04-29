@@ -31,7 +31,7 @@ const cartSlice = createSlice({
         ? existingItem.quantity += 1
         : state.cartItems.push({ ...action.payload, quantity: 1 });
 
-      console.table(current(state).cartItems);
+      // console.table(current(state).cartItems);
     }
   }
 });
@@ -40,6 +40,18 @@ const selectSelf = (state: RootState) => state.cart;
 
 export const selectCartItems = createDraftSafeSelector(selectSelf, (cart) =>
   cart.cartItems
+);
+
+export const selectCartTotalQuantity = createDraftSafeSelector(selectSelf, (cart) =>
+  cart.cartItems.reduce((totalQuantity, item) => {
+    return totalQuantity += item.quantity;
+  }, 0)
+);
+
+export const selectCartTotalPrice = createDraftSafeSelector(selectSelf, (cart) =>
+  cart.cartItems.reduce((totalPrice, item) => {
+    return totalPrice += item.price * item.quantity;
+  }, 0)
 );
 
 export const {

@@ -1,7 +1,7 @@
 import styles from 'pages/Header/CartIcon.module.scss';
 
 import { useAppSelector } from 'app/hooks';
-import { selectCartItems } from 'app/cartSlice';
+import { selectCartTotalQuantity } from 'app/cartSlice';
 
 import { ReactComponent as Icon } from 'assets/shopping-bag.svg';
 
@@ -10,7 +10,7 @@ const CartIcon = ({
 }: {
   clickHandler(): void;
 }) => {
-  const cartItems = useAppSelector(selectCartItems);
+  const totalQuantity = useAppSelector(selectCartTotalQuantity);
 
   return (
     <div className={styles.cartIconContainer} >
@@ -19,11 +19,7 @@ const CartIcon = ({
         onClick={clickHandler}
       />
       <span className={styles.itemCount}>
-        {
-          cartItems.reduce((totalQuantity, item) => {
-            return totalQuantity += item.quantity;
-          }, 0)
-        }
+        {totalQuantity}
       </span>
     </div>
   );
