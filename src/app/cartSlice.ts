@@ -62,9 +62,10 @@ export default cartSlice.reducer;
 
 const selectSelf = (state: RootState) => state.cart;
 
-export const selectCartItems = createDraftSafeSelector(selectSelf, (cart) =>
-  cart.cartItems
-);
+export const selectCartItems = createDraftSafeSelector(selectSelf, (cart) => {
+  console.log('cartItems');
+  return cart.cartItems;
+});
 
 export const selectCartTotalQuantity = createDraftSafeSelector(selectSelf, (cart) =>
   cart.cartItems.reduce((totalQuantity, item) => {

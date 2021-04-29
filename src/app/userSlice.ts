@@ -23,9 +23,10 @@ const userSlice = createSlice({
 
 const selectSelf = (state: RootState) => state.user;
 
-export const selectCurrentUser = createDraftSafeSelector(selectSelf, (user) =>
-  user.currentUser
-);
+export const selectCurrentUser = createDraftSafeSelector(selectSelf, (user) => {
+  console.log('currentUser');
+  return user.currentUser;
+});
 
 export const {
   setCurrentUser

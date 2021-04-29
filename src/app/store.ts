@@ -2,7 +2,10 @@ import {
   configureStore, ThunkAction, Action,
   combineReducers
 } from '@reduxjs/toolkit';
-import { persistStore, persistReducer } from 'redux-persist';
+import {
+  persistStore, persistReducer,
+  FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER,
+} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import userReducer from 'app/userSlice';
@@ -28,7 +31,11 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: {
       // Firebase user object have serialized data
-      ignoredActions: ['user/setCurrentUser']
+      ignoredActions: [
+        FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER,
+        'user/setCurrentUser'
+      ],
+      ignoredPaths: ['user.currentUser']
     }
   })
 });
