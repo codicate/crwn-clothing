@@ -46,7 +46,7 @@ const Header = () => {
         />
       </div>
 
-      {showCart && <Cart />}
+      {showCart && <Cart hideCart={() => setShowCart(false)} />}
 
     </div>
   );

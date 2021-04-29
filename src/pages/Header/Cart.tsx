@@ -7,7 +7,11 @@ import { selectCartItems } from 'app/cartSlice';
 import Button from 'components/Button';
 import CartItem from 'pages/Header/CartItem';
 
-const Cart = () => {
+const Cart = ({
+  hideCart
+}: {
+  hideCart: () => void;
+}) => {
   const history = useHistory();
   const cartItems = useAppSelector(selectCartItems);
 
@@ -25,7 +29,10 @@ const Cart = () => {
         )}
       </div>
       <Button
-        onClick={() => history.push('/checkout')}
+        onClick={() => {
+          history.push('/checkout');
+          hideCart();
+        }}
       >GO TO CHECKOUT</Button>
     </div>
   );
