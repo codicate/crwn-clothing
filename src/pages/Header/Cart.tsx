@@ -13,11 +13,15 @@ const Cart = () => {
   return (
     <div className={styles.cart}>
       <div className={styles.cartItems} >
-        {
+        {(
+          cartItems.length === 0
+        ) ? (
+          <span className={styles.emptyMsg}>Your cart is empty</span>
+        ) : (
           cartItems.map((item) =>
             <CartItem key={item.id} item={item} />
           )
-        }
+        )}
       </div>
       <Button>GO TO CHECKOUT</Button>
     </div>
