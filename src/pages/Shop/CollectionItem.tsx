@@ -1,7 +1,7 @@
 import styles from 'pages/Shop/CollectionItem.module.scss';
 
 import { useAppDispatch } from 'app/hooks';
-import { Item, addItem } from 'app/cartSlice';
+import { Item, addItemByOne } from 'app/cartSlice';
 
 import Button from 'components/Button';
 
@@ -26,7 +26,7 @@ const CollectionItem = ({
       </div>
       <Button
         styleOption='inverted'
-        onClick={() => dispatch(addItem(item))}
+        onClick={() => dispatch(addItemByOne(item))}
       >
         Add to Cart
       </Button>

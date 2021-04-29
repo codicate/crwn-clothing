@@ -10,34 +10,55 @@ export interface Item {
   name: string;
   price: number;
   imageUrl: string;
+  quantity?: number;
 }
 
 const initialState: {
-  cartItems: (Item & { quantity: number; })[];
+  cartItems: Item[];
 } = {
   cartItems: []
+};
+
+
+const getExistingItem = (cartItems: Item[], itemId: number) => {
+  return cartItems.find((cartItem) =>
+    cartItem.id === itemId
+  );
 };
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<Item>) => {
-      const existingItem = state.cartItems.find((cartItem) =>
-        cartItem.id === action.payload.id
-      );
+    addItemByOne: (state, action: PayloadAction<Item>) => {
+      const existingItem = getExistingItem(state.cartItems, action.payload.id);
 
-      existingItem
+      (existingItem?.quantity)
         ? existingItem.quantity += 1
         : state.cartItems.push({ ...action.payload, quantity: 1 });
     },
-    removeItem: (state, action: PayloadAction<Item>) => {
-      state.cartItems = state.cartItems.filter((cartItem) =>
-        cartItem.id !== action.payload.id
+
+    removeItemByOne: (state, action: PayloadAction<Item>) => {
+      const existingItem = getExistingItem(state.cartItems, action.payload.id);
+
+      (existingItem?.quantity) && (
+        (existingItem.quantity > 1)
+          ? existingItem.quantity -= 1
+          : state.cartItems.splice(state.cartItems.indexOf(existingItem), 1)
       );
+    },
+
+    removeAllItem: (state, action: PayloadAction<Item>) => {
+      state.cartItems.splice(state.cartItems.indexOf(action.payload), 1);
     }
   }
 });
+
+export const {
+  addItemByOne, removeItemByOne, removeAllItem
+} = cartSlice.actions;
+export default cartSlice.reducer;
+
 
 const selectSelf = (state: RootState) => state.cart;
 
@@ -47,17 +68,12 @@ export const selectCartItems = createDraftSafeSelector(selectSelf, (cart) =>
 
 export const selectCartTotalQuantity = createDraftSafeSelector(selectSelf, (cart) =>
   cart.cartItems.reduce((totalQuantity, item) => {
-    return totalQuantity += item.quantity;
+    return totalQuantity += (item?.quantity || 0);
   }, 0)
 );
 
 export const selectCartTotalPrice = createDraftSafeSelector(selectSelf, (cart) =>
   cart.cartItems.reduce((totalPrice, item) => {
-    return totalPrice += item.price * item.quantity;
+    return totalPrice += item.price * (item?.quantity || 1);
   }, 0)
 );
-
-export const {
-  addItem, removeItem
-} = cartSlice.actions;
-export default cartSlice.reducer;

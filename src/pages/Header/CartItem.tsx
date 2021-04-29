@@ -5,7 +5,7 @@ import { Item } from 'app/cartSlice';
 const CartItem = ({
   item: { imageUrl, price, name, quantity }
 }: {
-  item: Item & { quantity: number; };
+  item: Item;
 }) => {
   return (
     <div className={styles.cartItem}>
