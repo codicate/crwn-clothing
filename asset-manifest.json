@@ -1,23 +1,22 @@
 {
   "files": {
-    "main.css": "/e-commerce-app//static/css/main.21faf171.chunk.css",
-    "main.js": "/e-commerce-app//static/js/main.5edfec7a.chunk.js",
-    "main.js.map": "/e-commerce-app//static/js/main.5edfec7a.chunk.js.map",
-    "runtime-main.js": "/e-commerce-app//static/js/runtime-main.5e41ab0a.js",
-    "runtime-main.js.map": "/e-commerce-app//static/js/runtime-main.5e41ab0a.js.map",
-    "static/js/2.3d700848.chunk.js": "/e-commerce-app//static/js/2.3d700848.chunk.js",
-    "static/js/2.3d700848.chunk.js.map": "/e-commerce-app//static/js/2.3d700848.chunk.js.map",
-    "static/js/3.921377c1.chunk.js": "/e-commerce-app//static/js/3.921377c1.chunk.js",
-    "static/js/3.921377c1.chunk.js.map": "/e-commerce-app//static/js/3.921377c1.chunk.js.map",
-    "index.html": "/e-commerce-app//index.html",
-    "static/css/main.21faf171.chunk.css.map": "/e-commerce-app//static/css/main.21faf171.chunk.css.map",
-    "static/js/2.3d700848.chunk.js.LICENSE.txt": "/e-commerce-app//static/js/2.3d700848.chunk.js.LICENSE.txt",
-    "static/media/crown.e8ff78d2.svg": "/e-commerce-app//static/media/crown.e8ff78d2.svg"
+    "main.css": "/e-commerce-app/static/css/main.00c80623.chunk.css",
+    "main.js": "/e-commerce-app/static/js/main.77caf2dd.chunk.js",
+    "main.js.map": "/e-commerce-app/static/js/main.77caf2dd.chunk.js.map",
+    "runtime-main.js": "/e-commerce-app/static/js/runtime-main.878e0973.js",
+    "runtime-main.js.map": "/e-commerce-app/static/js/runtime-main.878e0973.js.map",
+    "static/js/2.19673a22.chunk.js": "/e-commerce-app/static/js/2.19673a22.chunk.js",
+    "static/js/2.19673a22.chunk.js.map": "/e-commerce-app/static/js/2.19673a22.chunk.js.map",
+    "index.html": "/e-commerce-app/index.html",
+    "static/css/main.00c80623.chunk.css.map": "/e-commerce-app/static/css/main.00c80623.chunk.css.map",
+    "static/js/2.19673a22.chunk.js.LICENSE.txt": "/e-commerce-app/static/js/2.19673a22.chunk.js.LICENSE.txt",
+    "static/media/crown.e8ff78d2.svg": "/e-commerce-app/static/media/crown.e8ff78d2.svg",
+    "static/media/shopping-bag.66e48d91.svg": "/e-commerce-app/static/media/shopping-bag.66e48d91.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.5e41ab0a.js",
-    "static/js/2.3d700848.chunk.js",
-    "static/css/main.21faf171.chunk.css",
-    "static/js/main.5edfec7a.chunk.js"
+    "static/js/runtime-main.878e0973.js",
+    "static/js/2.19673a22.chunk.js",
+    "static/css/main.00c80623.chunk.css",
+    "static/js/main.77caf2dd.chunk.js"
   ]
 }
