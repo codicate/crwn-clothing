@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styles from 'pages/Shop/CollectionItem.module.scss';
 
 import { useAppDispatch } from 'app/hooks';

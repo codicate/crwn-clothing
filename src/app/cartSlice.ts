@@ -1,4 +1,7 @@
-import { createSlice, PayloadAction, current } from '@reduxjs/toolkit';
+import {
+  createSlice, createDraftSafeSelector,
+  PayloadAction, current
+} from '@reduxjs/toolkit';
 
 import { RootState } from 'app/store';
 
@@ -33,7 +36,11 @@ const cartSlice = createSlice({
   }
 });
 
-export const selectCartItems = (state: RootState) => state.cart.cartItems;
+const selectSelf = (state: RootState) => state.cart;
+
+export const selectCartItems = createDraftSafeSelector(selectSelf, (cart) =>
+  cart.cartItems
+);
 
 export const {
   setCartItems

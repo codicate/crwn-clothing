@@ -9,6 +9,7 @@ import CartItem from 'pages/Header/CartItem';
 const Cart = () => {
   const cartItems = useAppSelector(selectCartItems);
 
+
   return (
     <div className={styles.cart}>
       <div className={styles.cartItems} >

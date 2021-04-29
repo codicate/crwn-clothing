@@ -1,13 +1,12 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createDraftSafeSelector, PayloadAction } from '@reduxjs/toolkit';
 import firebase from 'firebase/app';
 
 import { RootState } from 'app/store';
 
 type User = { id: string; } | firebase.User | null;
 
-
 const initialState: {
-  currentUser: User
+  currentUser: User;
 } = {
   currentUser: null
 };
@@ -22,7 +21,11 @@ const userSlice = createSlice({
   }
 });
 
-export const selectCurrentUser = (state: RootState) => state.user.currentUser;
+const selectSelf = (state: RootState) => state.user;
+
+export const selectCurrentUser = createDraftSafeSelector(selectSelf, (user) =>
+  user.currentUser
+);
 
 export const {
   setCurrentUser
