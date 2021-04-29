@@ -1,4 +1,5 @@
 import styles from 'pages/Header/Cart.module.scss';
+import { useHistory } from 'react-router-dom';
 
 import { useAppSelector } from 'app/hooks';
 import { selectCartItems } from 'app/cartSlice';
@@ -7,8 +8,8 @@ import Button from 'components/Button';
 import CartItem from 'pages/Header/CartItem';
 
 const Cart = () => {
+  const history = useHistory();
   const cartItems = useAppSelector(selectCartItems);
-
 
   return (
     <div className={styles.cart}>
@@ -23,7 +24,9 @@ const Cart = () => {
           )
         )}
       </div>
-      <Button>GO TO CHECKOUT</Button>
+      <Button
+        onClick={() => history.push('/checkout')}
+      >GO TO CHECKOUT</Button>
     </div>
   );
 };

@@ -11,6 +11,7 @@ import Header from 'pages/Header/Header';
 import Homepage from 'pages/Homepage/Homepage';
 import Shop from 'pages/Shop/Shop';
 import Account from 'pages/Account/Account';
+import Checkout from 'pages/Checkout/Checkout';
 import Item from 'pages/Items/Item';
 
 const App = () => {
@@ -30,12 +31,15 @@ const App = () => {
       <Switch>
         <Route exact path={`${url.current}`} component={Homepage} />
         <Route exact path={`${url.current}shop`} component={Shop} />
+        <Route exact path={`${url.current}checkout`} component={Checkout} />
         <Route exact path={`${url.current}account`} >
-          {
+          {(
             user
-              ? <Redirect to={url.current} />
-              : <Account />
-          }
+          ) ? (
+            <Redirect to={url.current} />
+          ) : (
+            <Account />
+          )}
         </Route>
         <Route path={`${url.current}item/:itemName`} component={Item} />
       </Switch>
