@@ -1,16 +1,13 @@
 import styles from 'pages/Shop/CollectionPreview.module.scss';
 
+import { Item } from 'app/cartSlice';
+
 import CollectionItem from 'pages/Shop/CollectionItem';
 
 const CollectionPreview = ({ title, items }:
   {
+    items: Item[];
     title: string;
-    items: {
-      id: number;
-      name: string;
-      price: number;
-      imageUrl: string;
-    }[];
   }
 ) => {
   return (
@@ -20,8 +17,8 @@ const CollectionPreview = ({ title, items }:
         {
           items
             .filter((_, idx) => idx < 4)
-            .map(({ id, ...props }) => (
-              <CollectionItem key={id} {...props} />
+            .map((item) => (
+              <CollectionItem key={item.id} item={item} />
             ))
         }
       </div>

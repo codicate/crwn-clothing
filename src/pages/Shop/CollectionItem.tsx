@@ -1,22 +1,17 @@
+import { useEffect } from 'react';
 import styles from 'pages/Shop/CollectionItem.module.scss';
 
 import { useAppDispatch } from 'app/hooks';
-import { setCartItems } from 'app/cartSlice';
+import { Item, setCartItems } from 'app/cartSlice';
 
 import Button from 'components/Button';
-import { useEffect } from 'react';
 
-const CollectionItem = ({ name, price, imageUrl }:
-  {
-    name: string;
-    price: number;
-    imageUrl: string;
-  }
-) => {
+const CollectionItem = ({
+  item, item: { id, name, price, imageUrl }
+}: {
+  item: Item;
+}) => {
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(setCartItems('hello'));
-  }, [dispatch]);
 
   return (
     <div className={styles.collectionItem}>
@@ -32,7 +27,7 @@ const CollectionItem = ({ name, price, imageUrl }:
       </div>
       <Button
         styleOption='inverted'
-        onClick={() => { }}
+        onClick={() => dispatch(setCartItems(item))}
       >
         Add to Cart
       </Button>
