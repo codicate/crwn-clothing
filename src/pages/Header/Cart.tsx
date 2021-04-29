@@ -1,5 +1,3 @@
-
-
 import styles from 'pages/Header/Cart.module.scss';
 
 import { useAppSelector } from 'app/hooks';
