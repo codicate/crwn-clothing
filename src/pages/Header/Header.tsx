@@ -10,26 +10,22 @@ import { ReactComponent as CrownIcon } from 'assets/crown.svg';
 import CartIcon from 'pages/Header/CartIcon';
 import Cart from 'pages/Header/Cart';
 
-const Header = ({ url }:
-  {
-    url: string;
-  }
-) => {
+const Header = () => {
   const currentUser = useAppSelector(selectCurrentUser);
 
   const [showCart, setShowCart] = useState(false);
 
   return (
     <div className={styles.header}>
-      <Link to={`${url}`} className={styles.crownIconContainer}>
+      <Link to='/' className={styles.crownIconContainer}>
         <CrownIcon />
       </Link>
 
       <div className={styles.options}>
-        <Link to={`${url}shop`}>
+        <Link to='/shop'>
           SHOP
         </Link>
-        <Link to={`${url}shop`}>
+        <Link to='/contact'>
           CONTACT
         </Link>
         {
@@ -40,7 +36,7 @@ const Header = ({ url }:
               SIGN OUTs
             </div>
           ) : (
-            <Link to={`${url}account`}>
+            <Link to='/account'>
               SIGN IN
             </Link>
           )

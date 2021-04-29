@@ -1,7 +1,6 @@
 import 'App.scss';
-
-import { useEffect, useRef } from 'react';
-import { Switch, Route, Redirect, useLocation } from "react-router-dom";
+import { useEffect } from 'react';
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import { useAppDispatch } from 'app/hooks';
 import { setCurrentUser } from 'app/userSlice';
@@ -15,9 +14,6 @@ import Checkout from 'pages/Checkout/Checkout';
 import Item from 'pages/Items/Item';
 
 const App = () => {
-  const location = useLocation();
-  const url = useRef(location.pathname);
-
   const user = useAuthUser();
 
   const dispatch = useAppDispatch();
@@ -27,21 +23,24 @@ const App = () => {
 
   return (
     <>
-      <Header url={url.current} />
+      <Header />
       <Switch>
-        <Route exact path={`${url.current}`} component={Homepage} />
-        <Route exact path={`${url.current}shop`} component={Shop} />
-        <Route exact path={`${url.current}checkout`} component={Checkout} />
-        <Route exact path={`${url.current}account`} >
+        <Route exact path='/' component={Homepage} />
+        <Route exact path='/shop' component={Shop} />
+        <Route exact path='/checkout' component={Checkout} />
+        <Route exact path='/account' >
           {(
             user
           ) ? (
-            <Redirect to={url.current} />
+            <Redirect to='/' />
           ) : (
             <Account />
           )}
         </Route>
-        <Route path={`${url.current}item/:itemName`} component={Item} />
+        <Route path='/item/:itemName' component={Item} />
+        <Route>
+          404
+        </Route>
       </Switch>
     </>
   );
