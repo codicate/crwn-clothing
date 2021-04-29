@@ -7,7 +7,7 @@ import { Item, setCartItems } from 'app/cartSlice';
 import Button from 'components/Button';
 
 const CollectionItem = ({
-  item, item: { id, name, price, imageUrl }
+  item, item: { name, price, imageUrl }
 }: {
   item: Item;
 }) => {

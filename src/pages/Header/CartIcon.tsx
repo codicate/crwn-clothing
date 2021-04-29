@@ -1,16 +1,16 @@
-import styles from 'pages/Header/ShoppingIcon.module.scss';
+import styles from 'pages/Header/CartIcon.module.scss';
 
 import { ReactComponent as Icon } from 'assets/shopping-bag.svg';
 
-const ShoppingIcon = ({ clickHandler }:
+const CartIcon = ({ clickHandler }:
   {
     clickHandler(): void;
   }
 ) => {
   return (
-    <div className={styles.shoppingIconContainer} >
+    <div className={styles.cartIconContainer} >
       <Icon
-        className={styles.shoppingIcon}
+        className={styles.cartIcon}
         onClick={clickHandler}
       />
       <span className={styles.itemCount}>
@@ -20,4 +20,4 @@ const ShoppingIcon = ({ clickHandler }:
   );
 };
 
-export default ShoppingIcon;
+export default CartIcon;

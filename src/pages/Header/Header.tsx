@@ -7,8 +7,8 @@ import { selectCurrentUser } from 'app/userSlice';
 import { auth } from 'utils/firebase';
 
 import { ReactComponent as CrownIcon } from 'assets/crown.svg';
-import ShoppingIcon from 'pages/Header/ShoppingIcon';
-import CardDropdown from 'pages/Header/CartDropdown';
+import CartIcon from 'pages/Header/CartIcon';
+import Cart from 'pages/Header/Cart';
 
 const Header = ({ url }:
   {
@@ -45,12 +45,12 @@ const Header = ({ url }:
             </Link>
           )
         }
-        <ShoppingIcon
+        <CartIcon
           clickHandler={() => setShowCart(showCart => !showCart)}
         />
       </div>
 
-      {showCart && <CardDropdown />}
+      {showCart && <Cart />}
 
     </div>
   );
