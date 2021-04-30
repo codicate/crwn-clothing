@@ -14,7 +14,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter basename='/e-commerce-app'>
       <Provider store={store}>
-        <PersistGate loading={<h1>LOADING</h1>} persistor={persistor}>
+        <PersistGate persistor={persistor}>
           <App />
         </PersistGate>
       </Provider>

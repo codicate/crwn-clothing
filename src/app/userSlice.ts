@@ -1,7 +1,7 @@
 import { createSlice, createDraftSafeSelector, PayloadAction } from '@reduxjs/toolkit';
-import firebase from 'firebase/app';
-
 import { RootState } from 'app/store';
+
+import firebase from 'firebase/app';
 
 type User = { id: string; } | firebase.User | null;
 

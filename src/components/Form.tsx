@@ -1,22 +1,20 @@
 import { FormEvent, useState } from 'react';
 
-import Input from 'components/Input';
+import Input, { inputOptions, ChangeHandler } from 'components/Input';
 
-const Form = ({ submitFn, children, inputItems }:
-  {
-    submitFn?: (inputItems: {}) => void | boolean | Promise<boolean | undefined>;
-    children?: React.ReactNode;
-    inputItems: [
-      string, // name
-      string?, // label
-      {
-        type?: string,
-        defaultValue?: string,
-        required?: boolean;
-      }?
-    ][];
-  }
-) => {
+type SubmitFn = (inputItems: {}) => void | boolean | Promise<boolean | undefined>;
+
+const Form = ({
+  submitFn, children, inputItems
+}: {
+  submitFn?: SubmitFn;
+  children?: React.ReactNode;
+  inputItems: [
+    string, // name
+    string?, // label
+    inputOptions?
+  ][];
+}) => {
   const defaultItems = inputItems.reduce((
     dict: { [name: string]: string; }, item
   ) => {
@@ -26,7 +24,7 @@ const Form = ({ submitFn, children, inputItems }:
 
   const [input, setInput] = useState(defaultItems);
 
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeHandler: ChangeHandler = (e) => {
     const { name, value } = e.target;
 
     setInput({

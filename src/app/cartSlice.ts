@@ -1,8 +1,4 @@
-import {
-  createSlice, createDraftSafeSelector,
-  PayloadAction, current
-} from '@reduxjs/toolkit';
-
+import { createSlice, createDraftSafeSelector, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
 
 export interface Item {
