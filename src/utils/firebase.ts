@@ -78,3 +78,15 @@ export const useAuthUser = () => {
 
   return user;
 };
+
+export const addCollection = async (collectionPath: string, objectArr: {}[]) => {
+  const collectionRef = firestore.collection(collectionPath);
+
+  const batch = firestore.batch();
+  objectArr.forEach(obj => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj)
+  });
+
+  return await batch.commit()
+};
