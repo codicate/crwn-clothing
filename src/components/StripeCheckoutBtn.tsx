@@ -18,7 +18,7 @@ const StripeCheckoutBtn = ({
       label='Pay Now'
       panelLabel='Pay Now'
       description={`Your total is $${price}`}
-      image=''
+      image='https://svgshare.com/i/CUz.svg'
 
       stripeKey={stripeKey}
       amount={priceInCent}
