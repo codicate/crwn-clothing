@@ -6,8 +6,8 @@ import CollectionItem from 'pages/Shop/CollectionItem';
 
 const CollectionPreview = ({ title, items }:
   {
-    items: Item[];
     title: string;
+    items: Item[];
   }
 ) => {
   return (
