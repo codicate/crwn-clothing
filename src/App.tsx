@@ -8,10 +8,10 @@ import { useAuthUser } from 'utils/firebase';
 
 import Header from 'pages/Header/Header';
 import Homepage from 'pages/Homepage/Homepage';
-import Shop from 'pages/Shop/Shop';
-import Account from 'pages/Account/Account';
 import Checkout from 'pages/Checkout/Checkout';
-import Item from 'pages/Items/Item';
+import Account from 'pages/Account/Account';
+import Shop from 'pages/Shop/Shop';
+import ShopRoute from 'pages/Shop/ShopRoute';
 
 const App = () => {
   const user = useAuthUser();
@@ -26,8 +26,8 @@ const App = () => {
       <Header />
       <Switch>
         <Route exact path='/' component={Homepage} />
-        <Route exact path='/shop' component={Shop} />
         <Route exact path='/checkout' component={Checkout} />
+
         <Route exact path='/account' >
           {(
             user
@@ -37,8 +37,11 @@ const App = () => {
             <Account />
           )}
         </Route>
-        <Route path='/item/:itemName' component={Item} />
-        <Route>
+
+        <Route exact path='/shop' component={Shop} />
+        {ShopRoute('/shop')}
+
+        <Route path='*'>
           404
         </Route>
       </Switch>
