@@ -11,7 +11,7 @@ import Homepage from 'pages/Homepage/Homepage';
 import Checkout from 'pages/Checkout/Checkout';
 import Account from 'pages/Account/Account';
 import Shop from 'pages/Shop/Shop';
-import ShopRoute from 'pages/Shop/ShopRoute';
+
 
 const App = () => {
   const user = useAuthUser();
@@ -38,8 +38,7 @@ const App = () => {
           )}
         </Route>
 
-        <Route exact path='/shop' component={Shop} />
-        {ShopRoute('/shop')}
+        {Shop('/shop')}
 
         <Route path='*'>
           404
