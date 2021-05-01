@@ -12,7 +12,6 @@ const ShopRoute = (
         key={routeName}
         exact path={`${path}/${routeName}`}
       >
-        {console.log(routeName)}
         <CollectionPage
           collection={props}
         />
