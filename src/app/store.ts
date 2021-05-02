@@ -2,6 +2,7 @@ import {
   configureStore, ThunkAction, Action,
   combineReducers
 } from '@reduxjs/toolkit';
+
 import {
   persistStore, persistReducer,
   FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER
