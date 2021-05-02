@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { fetchCollections, selectInventoryCollections } from 'app/inventorySlice';
+import { setCollections, selectInventoryCollections } from 'app/inventorySlice';
+
 import CollectionPreview from 'pages/Shop/CollectionPreview';
 import CollectionPage from 'pages/Shop/CollectionPage';
 import Spinner from 'components/Spinner';
@@ -12,7 +13,7 @@ import Spinner from 'components/Spinner';
 const Shop = (path: string) => {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchCollections());
+    dispatch(setCollections());
   }, [dispatch]);
 
   const inventory = useAppSelector(selectInventoryCollections);
