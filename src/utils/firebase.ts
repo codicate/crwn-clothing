@@ -55,10 +55,8 @@ export const createAuthUserDoc = async (
 };
 
 
-export type User = firebase.User | { id: string; } | null;
-
 export const useAuthUser = () => {
-  const [user, setUser] = useState<User>(null);
+  const [user, setUser] = useState<firebase.User | { id: string; } | null>(null);
 
   useEffect(() => {
     const unsubFromAuth = auth.onAuthStateChanged(async newUser => {
@@ -87,8 +85,8 @@ export const addCollection = async (collectionPath: string, objectArr: {}[]) => 
   const batch = firestore.batch();
   objectArr.forEach(obj => {
     const newDocRef = collectionRef.doc();
-    batch.set(newDocRef, obj);
+    batch.set(newDocRef, obj)
   });
 
-  return await batch.commit();
+  return await batch.commit()
 };

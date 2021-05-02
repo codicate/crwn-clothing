@@ -2,15 +2,11 @@ import {
   configureStore, ThunkAction, Action,
   combineReducers
 } from '@reduxjs/toolkit';
-
 import {
   persistStore, persistReducer,
   FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
-import createSagaMiddleware from 'redux-saga';
-import {fetchCollections } from 'app/saga';
 
 import userReducer from 'app/userSlice';
 import cartReducer from 'app/cartSlice';
@@ -31,25 +27,19 @@ const rootReducer = combineReducers({
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 
-const sagaMiddleware = createSagaMiddleware();
-
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: {
+      // Firebase user object have serialized data
       ignoredActions: [
         FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER,
         'user/setCurrentUser'
       ],
-      // Firebase user object have serialized data
       ignoredPaths: ['user.currentUser']
-    },
-
-    thunk: false
-  }).concat(sagaMiddleware)
+    }
+  })
 });
-
-sagaMiddleware.run(fetchCollections);
 
 export const persistor = persistStore(store);
 
