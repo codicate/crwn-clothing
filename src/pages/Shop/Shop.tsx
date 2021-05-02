@@ -1,43 +1,21 @@
 import styles from 'pages/Shop/Shop.module.scss';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 
-import { firestore } from 'utils/firebase';
-import { Item } from 'app/cartSlice';
-
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { fetchCollections, selectInventoryCollections } from 'app/inventorySlice';
 import CollectionPreview from 'pages/Shop/CollectionPreview';
 import CollectionPage from 'pages/Shop/CollectionPage';
 import Spinner from 'components/Spinner';
 
 
-interface Inventory {
-  id: string;
-  title: string;
-  routeName: string;
-  items: Item[];
-}
-
 const Shop = (path: string) => {
-  const [inventory, setInventory] = useState<Inventory[]>([]);
-
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    const collectionRef = firestore.collection('inventory');
+    dispatch(fetchCollections());
+  }, [dispatch]);
 
-    collectionRef.onSnapshot(async (snapshot) => {
-      const inventoryData = snapshot.docs.map((doc) => {
-        const { title, items } = doc.data();
-
-        return {
-          title,
-          items,
-          id: doc.id,
-          routeName: encodeURI(title.toLowerCase())
-        };
-      });
-
-      setInventory(inventoryData as Inventory[]);
-    });
-  }, []);
+  const inventory = useAppSelector(selectInventoryCollections);
 
   return (
     inventory.length === 0
