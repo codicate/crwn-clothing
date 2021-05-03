@@ -1,11 +1,14 @@
-import { createSlice, createAsyncThunk, createDraftSafeSelector } from '@reduxjs/toolkit';
+import {
+  createSlice, createAsyncThunk, createDraftSafeSelector,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
 
 import { firestore } from 'utils/firebase';
 import { Item } from 'app/cartSlice';
 
 
-interface Inventory {
+interface Collection {
   id: string;
   title: string;
   routeName: string;
@@ -13,15 +16,17 @@ interface Inventory {
 }
 
 const initialState: {
-  status: 'idle' | 'loading' | 'failed';
-  collections: Inventory[];
+  status: 'idle' | 'loading' | 'succeed' | 'failed';
+  collections: Collection[];
 } = {
   status: 'idle',
   collections: []
 };
 
+
 export const fetchCollections = createAsyncThunk(
   'inventory/fetchCollections',
+
   async (_, { rejectWithValue }) => {
     const collectionRef = firestore.collection('inventory');
 
@@ -40,38 +45,51 @@ export const fetchCollections = createAsyncThunk(
       });
 
       return inventoryData;
+
     } catch (err) {
+      console.error(err);
       return rejectWithValue(err.response.data);
     }
   }
 );
+
 
 const inventorySlice = createSlice({
   name: 'inventory',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchCollections.pending, (state) => {
+    builder.addCase(
+      fetchCollections.pending,
+      (state) => {
         state.status = 'loading';
-      })
-      .addCase(fetchCollections.fulfilled, (state, action) => {
-        state.status = 'idle';
+      }
+    ).addCase(
+      fetchCollections.fulfilled,
+      (state, action: PayloadAction<Collection[]>) => {
+        state.status = 'succeed';
         state.collections = action.payload;
-      });
+      }
+    ).addCase(
+      fetchCollections.rejected,
+      (state) => {
+        state.status = 'failed';
+      }
+    );
   },
 });
 
 export default inventorySlice.reducer;
 
+
 const selectSelf = (state: RootState) => state.inventory;
 
-export const selectInventoryStatus = createDraftSafeSelector(
+export const selectFetchCollectionsStatus = createDraftSafeSelector(
   selectSelf,
   (inventory) => inventory.status
 );
 
-export const selectInventoryCollections = createDraftSafeSelector(
+export const selectCollections = createDraftSafeSelector(
   selectSelf,
   (inventory) => inventory.collections
 );

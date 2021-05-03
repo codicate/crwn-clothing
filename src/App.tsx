@@ -2,9 +2,8 @@ import 'App.scss';
 import { useEffect } from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import { useAppDispatch } from 'app/hooks';
-import { setCurrentUser } from 'app/userSlice';
-import { useAuthUser } from 'utils/firebase';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { userSignin, selectCurrentUser } from 'app/userSlice';
 
 import Header from 'pages/Header/Header';
 import Homepage from 'pages/Homepage/Homepage';
@@ -14,12 +13,12 @@ import Shop from 'pages/Shop/Shop';
 
 
 const App = () => {
-  const user = useAuthUser();
-
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(setCurrentUser(user));
-  }, [dispatch, user]);
+    dispatch(userSignin());
+  }, [dispatch]);
+
+  const user = useAppSelector(selectCurrentUser);
 
   return (
     <>

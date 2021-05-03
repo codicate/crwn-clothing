@@ -24,62 +24,36 @@ const provider = new firebase.auth
   .setCustomParameters({ prompt: 'select_account' });
 
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
-
+export type User = firebase.User | { id: string; } | null;
 
 export const createAuthUserDoc = async (
   user: firebase.User,
   data?: {}
 ) => {
-  if (!user) return;
 
   const userRef = firestore.doc(`users/${user.uid}`);
-  const userSnapShot = await userRef.get();
 
-  if (!userSnapShot.exists) {
-    const { displayName, email } = user;
-    const joinedAt = new Date();
+  try {
+    const userSnapShot = await userRef.get();
 
-    try {
+    if (!userSnapShot.exists) {
+      const { displayName, email } = user;
+      const joinedAt = new Date();
+
       await userRef.set({
         displayName,
         email,
         joinedAt,
         ...data
       });
-    } catch (err) {
-      console.error('Error creating user:', err.message);
     }
+  } catch (err) {
+    console.error('Error creating user:', err.message);
   }
 
   return userRef;
 };
 
-
-export type User = firebase.User | { id: string; } | null;
-
-export const useAuthUser = () => {
-  const [user, setUser] = useState<User>(null);
-
-  useEffect(() => {
-    const unsubFromAuth = auth.onAuthStateChanged(async newUser => {
-      if (newUser) {
-        const userRef = await createAuthUserDoc(newUser);
-
-        userRef && userRef.onSnapshot(userSnapShot => {
-          setUser({
-            id: userSnapShot.id,
-            ...userSnapShot.data()
-          });
-        });
-      }
-
-      setUser(newUser);
-    });
-    return () => unsubFromAuth();
-  }, []);
-
-  return user;
-};
 
 export const addCollection = async (collectionPath: string, objectArr: {}[]) => {
   const collectionRef = firestore.collection(collectionPath);

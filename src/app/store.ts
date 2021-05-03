@@ -35,7 +35,7 @@ export const store = configureStore({
       // Firebase user object have serialized data
       ignoredActions: [
         FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER,
-        'user/setCurrentUser'
+        'user/userSignin/fulfilled'
       ],
       ignoredPaths: ['user.currentUser']
     }
