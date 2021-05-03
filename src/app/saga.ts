@@ -1,38 +1,37 @@
-import { takeEvery } from "redux-saga/effects";
+import { takeEvery, call, put, SagaReturnType } from "redux-saga/effects";
 
-import { setCollections } from 'app/inventorySlice';
+import { fetchCollections, setCollections } from 'app/inventorySlice';
 
 import { firestore } from 'utils/firebase';
-import firebase from 'firebase';
 
 
-export function* fetchCollectionsAsync() {
+export function* fetchCollectionsFromFirebase() {
   const collectionRef = firestore.collection('inventory');
+  type Snapshot = SagaReturnType<typeof collectionRef.get>;
+
+  const convertSnapshotData = (snapshot: Snapshot) => snapshot.docs.map((doc) => {
+    const { title, items } = doc.data();
+
+    return {
+      title,
+      items,
+      id: doc.id,
+      routeName: encodeURI(title.toLowerCase())
+    };
+  });
 
   try {
-    const snapshot: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData> = yield collectionRef.get();
+    const snapshot: Snapshot = yield collectionRef.get();
+    const inventoryData: SagaReturnType<typeof convertSnapshotData> = yield call(convertSnapshotData, snapshot);
 
-    const inventoryData = snapshot.docs.map((doc) => {
-      const { title, items } = doc.data();
+    yield put(setCollections(inventoryData));
 
-      return {
-        title,
-        items,
-        id: doc.id,
-        routeName: encodeURI(title.toLowerCase())
-      };
-    });
-
-    return inventoryData;
   } catch (err) {
-    return err.response.data;
+    console.error(err);
+    yield put(setCollections(err.response.data));
   }
 }
 
-export function* fetchCollections() {
-  yield takeEvery(setCollections.type, fetchCollectionsAsync);
-}
-
 export default function* rootSaga() {
-
+  yield takeEvery(fetchCollections.type, fetchCollectionsFromFirebase);
 }

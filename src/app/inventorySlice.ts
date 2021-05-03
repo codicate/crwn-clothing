@@ -6,7 +6,7 @@ import { RootState } from 'app/store';
 import { Item } from 'app/cartSlice';
 
 
-interface Inventory {
+interface Collection {
   id: string;
   title: string;
   routeName: string;
@@ -14,8 +14,8 @@ interface Inventory {
 }
 
 const initialState: {
-  status: 'idle' | 'loading' | 'failed';
-  collections: Inventory[];
+  status: 'idle' | 'loading' | 'success' | 'failed';
+  collections: Collection[];
 } = {
   status: 'idle',
   collections: []
@@ -25,15 +25,22 @@ const inventorySlice = createSlice({
   name: 'inventory',
   initialState,
   reducers: {
-    setCollections: (state) => {
-
+    fetchCollections: (state) => {
+      state.status = 'loading';
+    },
+    setCollections: (state, action: PayloadAction<Collection[]>) => {
+      state.collections = action.payload;
+      state.status = 'success';
+    },
+    setCollectionsFailed: (state) => {
+      state.status = 'failed';
     }
   }
 });
 
 export default inventorySlice.reducer;
 export const {
-  setCollections
+  fetchCollections, setCollections
 } = inventorySlice.actions;
 
 const selectSelf = (state: RootState) => state.inventory;

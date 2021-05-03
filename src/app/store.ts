@@ -10,7 +10,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 import createSagaMiddleware from 'redux-saga';
-import {fetchCollections } from 'app/saga';
+import rootSaga from 'app/saga';
 
 import userReducer from 'app/userSlice';
 import cartReducer from 'app/cartSlice';
@@ -49,7 +49,7 @@ export const store = configureStore({
   }).concat(sagaMiddleware)
 });
 
-sagaMiddleware.run(fetchCollections);
+sagaMiddleware.run(rootSaga);
 
 export const persistor = persistStore(store);
 
