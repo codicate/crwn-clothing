@@ -12,7 +12,7 @@ import Cart from 'pages/Header/Cart';
 
 const Header = () => {
   const currentUser = useAppSelector(selectCurrentUser);
-
+  
   const [showCart, setShowCart] = useState(false);
 
   return (

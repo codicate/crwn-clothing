@@ -2,8 +2,9 @@ import 'App.scss';
 import { useEffect } from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
 
+import { auth } from 'utils/firebase';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { userSignin, selectCurrentUser } from 'app/userSlice';
+import { setCurrentUser, selectCurrentUser } from 'app/userSlice';
 
 import Header from 'pages/Header/Header';
 import Homepage from 'pages/Homepage/Homepage';
@@ -14,11 +15,16 @@ import Shop from 'pages/Shop/Shop';
 
 const App = () => {
   const dispatch = useAppDispatch();
+
   useEffect(() => {
-    dispatch(userSignin());
+    const unsubFromAuth = auth.onAuthStateChanged(newUser => {
+      dispatch(setCurrentUser(newUser));
+    });
+
+    return () => unsubFromAuth();
   }, [dispatch]);
 
-  const user = useAppSelector(selectCurrentUser);
+  const currentUser = useAppSelector(selectCurrentUser);
 
   return (
     <>
@@ -29,7 +35,7 @@ const App = () => {
 
         <Route exact path='/account' >
           {(
-            user
+            currentUser
           ) ? (
             <Redirect to='/' />
           ) : (

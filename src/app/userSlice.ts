@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
 
-import firebase, { createAuthUserDoc, auth, User } from 'utils/firebase';
+import firebase, { createAuthUserDoc, User } from 'utils/firebase';
 
 
 const initialState: {
@@ -17,17 +17,12 @@ const initialState: {
 };
 
 
-export const userSignin = createAsyncThunk(
+export const setCurrentUser = createAsyncThunk(
   'user/userSignin',
 
-  async (_, { rejectWithValue }) => {
+  async (newUser: firebase.User | null, { rejectWithValue }) => {
     try {
-      const newUser = await new Promise<firebase.User>((res, rej) => {
-        const unsubFromAuth = auth.onAuthStateChanged(newUser => {
-          unsubFromAuth();
-          newUser && res(newUser);
-        }, rej);
-      });
+      if (!newUser) return null;
 
       const userRef = await createAuthUserDoc(newUser);
       const userSnapShot = await userRef.get();
@@ -48,21 +43,23 @@ export const userSignin = createAsyncThunk(
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+  },
   extraReducers: (builder) => {
     builder.addCase(
-      userSignin.pending,
+      setCurrentUser.pending,
       (state) => {
         state.status = 'loading';
       }
     ).addCase(
-      userSignin.fulfilled,
+      setCurrentUser.fulfilled,
       (state, action: PayloadAction<User>) => {
         state.status = 'succeed';
         state.currentUser = action.payload;
+        console.log('user updated in redux', action.payload);
       }
     ).addCase(
-      userSignin.rejected,
+      setCurrentUser.rejected,
       (state) => {
         state.status = 'failed';
       }
