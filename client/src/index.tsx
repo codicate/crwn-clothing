@@ -14,7 +14,7 @@ import App from 'App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename='/e-commerce-app'>
+    <BrowserRouter basename='/crwn-clothing'>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <App />
