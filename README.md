@@ -1,4 +1,4 @@
-# E-Commerce-App
+# CRWN Clothing
 
 This project is made from a [tutorial](https://www.udemy.com/course/complete-react-developer-zero-to-mastery/). The tutorial used class components, javascript, and older redux. 
 
@@ -10,8 +10,9 @@ _nothing wrong with the technologies used in the tutorial, but if I can I would 
 
 ### Current Technologies used:
 - React with hooks
-- Redux with Redux Toolkit
+- Redux with Redux Toolkit, reselect, persist
 - Typescript
 - Sass with module
+- styled-components
 - react-router
 - Firebase
