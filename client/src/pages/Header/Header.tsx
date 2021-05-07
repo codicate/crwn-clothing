@@ -11,9 +11,9 @@ import CartIcon from 'pages/Header/CartIcon';
 import Cart from 'pages/Header/Cart';
 
 const Header = () => {
-  const currentUser = useAppSelector(selectCurrentUser);
-  
   const [showCart, setShowCart] = useState(false);
+
+  const currentUser = useAppSelector(selectCurrentUser);
 
   return (
     <div className={styles.header}>

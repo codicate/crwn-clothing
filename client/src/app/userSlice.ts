@@ -56,7 +56,6 @@ const userSlice = createSlice({
       (state, action: PayloadAction<User>) => {
         state.status = 'succeed';
         state.currentUser = action.payload;
-        console.log('user updated in redux', action.payload);
       }
     ).addCase(
       setCurrentUser.rejected,

@@ -39,7 +39,7 @@ const cartSlice = createSlice({
 
     removeAllItem: (state, action: PayloadAction<Item>) => {
       state.splice(state.indexOf(action.payload), 1);
-    }
+    },
   }
 });
 
