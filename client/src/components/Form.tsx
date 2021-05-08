@@ -1,18 +1,20 @@
-import { FormEvent, useState } from 'react';
+import { useState, FormEvent } from 'react';
 
 import Input, { inputOptions, ChangeHandler } from 'components/Input';
 
 type SubmitFn = (inputItems: {}) => void | boolean | Promise<boolean | undefined>;
 
 const Form = ({
-  submitFn, children, inputItems
+  submitFn,
+  children,
+  inputItems
 }: {
   submitFn?: SubmitFn;
   children?: React.ReactNode;
   inputItems: [
-    string, // name
-    string?, // label
-    inputOptions?
+    name: string,
+    label?: string,
+    inputOptions?: inputOptions
   ][];
 }) => {
   const defaultItems = inputItems.reduce((
@@ -26,6 +28,7 @@ const Form = ({
 
   const changeHandler: ChangeHandler = (e) => {
     const { name, value } = e.target;
+    console.log(value);
 
     setInput({
       ...input,
