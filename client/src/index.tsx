@@ -14,13 +14,13 @@ import App from 'App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename='/crwn-clothing'>
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <BrowserRouter basename='/crwn-clothing'>
           <App />
-        </PersistGate>
-      </Provider>
-    </BrowserRouter>
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
