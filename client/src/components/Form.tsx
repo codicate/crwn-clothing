@@ -1,34 +1,31 @@
 import { useState, FormEvent } from 'react';
 
-import Input, { inputOptions, ChangeHandler } from 'components/Input';
+import Input, { InputOptions, ChangeHandler } from 'components/Input';
 
-type SubmitFn = (inputItems: {}) => void | boolean | Promise<boolean | undefined>;
-
-const Form = ({
+function Form<
+  T extends { [name: string]: InputOptions; }
+>({
+  className,
   submitFn,
   children,
   inputItems
 }: {
-  submitFn?: SubmitFn;
+  className?: string;
+  submitFn?: (inputItems: Record<keyof T, string>) => void | boolean | Promise<boolean | void>;
   children?: React.ReactNode;
-  inputItems: [
-    name: string,
-    label?: string,
-    inputOptions?: inputOptions
-  ][];
-}) => {
-  const defaultItems = inputItems.reduce((
-    dict: { [name: string]: string; }, item
-  ) => {
-    dict[item[0]] = item[2]?.defaultValue || '';
-    return dict;
-  }, {});
+  inputItems: T;
+}) {
+
+  const defaultItems = Object.assign(
+    Object.entries(inputItems).map(([name, value]) => ({
+      [name]: value.defaultValue || ''
+    }))
+  );
 
   const [input, setInput] = useState(defaultItems);
 
   const changeHandler: ChangeHandler = (e) => {
     const { name, value } = e.target;
-    console.log(value);
 
     setInput({
       ...input,
@@ -47,16 +44,18 @@ const Form = ({
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form
+      className={className}
+      onSubmit={submitHandler}
+    >
       {
-        inputItems.map((item, idx) => (
+        Object.entries(inputItems).map(([name, value], idx) => (
           <Input
             key={idx}
             changeHandler={changeHandler}
-            name={item[0]}
-            value={input[item[0]]}
-            label={item[1]}
-            {...item[2]}
+            name={name}
+            value={input[name]}
+            {...value}
           />
         ))
       }
