@@ -1,6 +1,6 @@
 # CRWN Clothing
 
-[Live](codicate.github.io/crwn-clothing/)
+[Live](https://codicate.github.io/crwn-clothing/)
 
 This project is made from a [tutorial](https://www.udemy.com/course/complete-react-developer-zero-to-mastery/). The tutorial used class components, javascript, and older redux. 
 
