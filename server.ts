@@ -7,6 +7,8 @@ import Stripe from 'stripe';
 
 const buildPath = 'client/build';
 
+const __dirname = path.dirname(new URL(import.meta.url).pathname)
+
 const app = express();
 
 app.use(cors());
@@ -14,10 +16,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(import.meta.url, buildPath)));
+  app.use(express.static(path.join(__dirname, buildPath)));
 
   app.get('*', (_, res) => {
-    res.sendFile(path.join(import.meta.url, buildPath, 'index.html'));
+    res.sendFile(path.join(__dirname, buildPath, 'index.html'));
   });
 
 } else {
@@ -25,6 +27,8 @@ if (process.env.NODE_ENV === 'production') {
     dotenv.config()
   );
 }
+
+console.log(import.meta.url)
 
 const port = process.env.PORT || 5000;
 app.listen(port);

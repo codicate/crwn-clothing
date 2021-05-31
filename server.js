@@ -54,6 +54,7 @@ else {
         return dotenv.config();
     });
 }
+console.log(import.meta.url);
 var port = process.env.PORT || 5000;
 app.listen(port);
 app.post('/crwn-clothing/payment', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
