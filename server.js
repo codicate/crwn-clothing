@@ -57,7 +57,7 @@ else {
     });
 }
 app.listen(port);
-app.post('/crwn-clothing/payment', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+app.post('/payment', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var stripe, charge, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {

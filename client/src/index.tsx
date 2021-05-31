@@ -16,7 +16,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <BrowserRouter basename='/crwn-clothing'>
+        <BrowserRouter>
           <App />
         </BrowserRouter>
       </PersistGate>

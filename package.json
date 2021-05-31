@@ -8,7 +8,7 @@
     "preserver": "tsc -p tsconfig.json",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "build": "cd client && npm run build",
+    "build": "cd client && yarn build",
     "deploy": "cd client && yarn deploy",
     "heroku": "git push heroku main",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"

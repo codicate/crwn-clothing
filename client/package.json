@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:5000",
-  "homepage": "https://codicate.github.io/crwn-clothing/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
