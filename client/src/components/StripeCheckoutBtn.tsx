@@ -25,23 +25,26 @@ const StripeCheckoutBtn = ({
 
       stripeKey={stripeKey}
       amount={priceInCent}
-      token={(token) => {
+      token={async (token) => {
         console.log(token);
 
-        axios({
-          url: 'payment',
-          method: 'post',
-          data: {
-            amount: priceInCent,
-            token
-          }
-        }).then((res) => {
+        try {
+          const res = await axios({
+            url: 'payment',
+            method: 'post',
+            data: {
+              amount: priceInCent,
+              token
+            }
+          });
+
           alert('Payment Successful');
           console.log('payment response:', res);
-        }).catch((err) => {
+
+        } catch (err) {
           alert('Payment Unsuccessful');
           console.error('payment error:', err);
-        });
+        }
       }}
     />
   );

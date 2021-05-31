@@ -16,14 +16,18 @@ const SignIn = () => {
       </span>
 
       <Form
-        inputItems={[
-          ['email', 'Email',
-            { type: 'email', required: true }
-          ],
-          ['password', 'Password',
-            { type: 'password', required: true }
-          ]
-        ]}
+        inputItems={{
+          email: {
+            label: 'Email',
+            type: 'email',
+            required: true
+          },
+          password: {
+            label: 'Password',
+            type: 'password',
+            required: true
+          }
+        }}
         submitFn={async ({ email, password }:
           { [name: string]: string; }
         ) => {

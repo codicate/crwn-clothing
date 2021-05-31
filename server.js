@@ -56,28 +56,32 @@ else {
 }
 var port = process.env.PORT || 5000;
 app.listen(port);
-app.post('/payment', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+console.log('yoyoyuo');
+app.post('/crwn-clothing/payment', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var stripe, charge, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
+                console.log('stuff is running');
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
                 stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2020-08-27' });
                 return [4 /*yield*/, stripe.charges.create({
                         source: req.body.token.id,
                         amount: req.body.amount,
                         currency: 'usd'
                     })];
-            case 1:
+            case 2:
                 charge = _a.sent();
                 res.status(200).send({ sucess: charge });
-                return [3 /*break*/, 3];
-            case 2:
+                return [3 /*break*/, 4];
+            case 3:
                 err_1 = _a.sent();
-                console.error(err_1);
+                console.error('ERROR BRUH WTF', err_1);
                 res.status(500).send({ error: err_1 });
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); });

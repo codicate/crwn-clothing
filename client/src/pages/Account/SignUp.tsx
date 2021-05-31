@@ -16,20 +16,27 @@ const SignUp = () => {
       </span>
 
       <Form
-        inputItems={[
-          ['displayName', 'Display Name',
-            { required: true }
-          ],
-          ['email', 'Email',
-            { type: 'email', required: true }
-          ],
-          ['password', 'Password',
-            { type: 'password', required: true }
-          ],
-          ['confirmPassword', 'Confirm Password',
-            { type: 'password', required: true }
-          ]
-        ]}
+        inputItems={{
+          displayName: {
+            label: 'Display Name',
+            required: true
+          },
+          email: {
+            label: 'Email',
+            type: 'email',
+            required: true
+          },
+          password: {
+            label: 'Password',
+            type: 'password',
+            required: true
+          },
+          confirmPassword: {
+            label: 'Confirm Password',
+            type: 'password',
+            required: true
+          }
+        }}
         submitFn={async ({ displayName, email, password, confirmPassword }:
           { [name: string]: string; }
         ) => {

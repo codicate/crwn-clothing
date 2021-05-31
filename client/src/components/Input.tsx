@@ -1,4 +1,4 @@
-import styles from 'components/Form/Input.module.scss';
+import styles from 'components/Input.module.scss';
 import { useRef } from 'react';
 
 export interface InputOptions {

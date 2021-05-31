@@ -30,7 +30,7 @@ const port = process.env.PORT || 5000;
 app.listen(port);
 
 
-app.post('/payment', async (req, res) => {
+app.post('/crwn-clothing/payment', async (req, res) => {
   try {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion: '2020-08-27' });
 
