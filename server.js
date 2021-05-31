@@ -34,8 +34,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import path from 'path';
 import express from 'express';
+import path from 'path';
 import cors from 'cors';
 import Stripe from 'stripe';
 var buildPath = 'client/build';
@@ -44,9 +44,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, buildPath)));
+    app.use(express.static(path.join(import.meta.url, buildPath)));
     app.get('*', function (_, res) {
-        res.sendFile(path.join(__dirname, buildPath, 'index.html'));
+        res.sendFile(path.join(import.meta.url, buildPath, 'index.html'));
     });
 }
 else {
@@ -56,32 +56,28 @@ else {
 }
 var port = process.env.PORT || 5000;
 app.listen(port);
-console.log('yoyoyuo');
 app.post('/crwn-clothing/payment', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var stripe, charge, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                console.log('stuff is running');
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
+                _a.trys.push([0, 2, , 3]);
                 stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2020-08-27' });
                 return [4 /*yield*/, stripe.charges.create({
                         source: req.body.token.id,
                         amount: req.body.amount,
                         currency: 'usd'
                     })];
-            case 2:
+            case 1:
                 charge = _a.sent();
                 res.status(200).send({ sucess: charge });
-                return [3 /*break*/, 4];
-            case 3:
+                return [3 /*break*/, 3];
+            case 2:
                 err_1 = _a.sent();
-                console.error('ERROR BRUH WTF', err_1);
+                console.error(err_1);
                 res.status(500).send({ error: err_1 });
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); });

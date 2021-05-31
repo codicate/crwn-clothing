@@ -1,5 +1,5 @@
-import path from 'path';
 import express from 'express';
+import path from 'path';
 import cors from 'cors';
 
 import Stripe from 'stripe';
@@ -14,10 +14,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, buildPath)));
+  app.use(express.static(path.join(import.meta.url, buildPath)));
 
   app.get('*', (_, res) => {
-    res.sendFile(path.join(__dirname, buildPath, 'index.html'));
+    res.sendFile(path.join(import.meta.url, buildPath, 'index.html'));
   });
 
 } else {
