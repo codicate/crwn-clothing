@@ -5,14 +5,15 @@ import { Collection } from 'app/inventorySlice';
 
 import CollectionItem from 'pages/Shop/CollectionItem';
 
+
 const CollectionPreview = ({
-  collection: { title, routeName, items }
+  collection: { title, items }
 }: {
   collection: Collection;
 }) => {
   return (
     <div className={styles.collectionPreview}>
-      <Link to={'/shop/' + routeName}>
+      <Link to={'/shop/' + encodeURI(title.toLowerCase())}>
         <h1 className={styles.title}>{title.toUpperCase()}</h1>
       </Link>
       <div className={styles.preview}>
@@ -27,5 +28,6 @@ const CollectionPreview = ({
     </div>
   );
 };
+
 
 export default CollectionPreview;

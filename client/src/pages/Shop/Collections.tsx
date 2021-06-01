@@ -9,8 +9,8 @@ const CollectionPage = ({
   collection: Collection;
 }) => {
   return (
-    <div className={styles.collectionPage}>
-      <h2 className={styles.title}>{title}</h2>
+    <div className={styles.collections}>
+      <h2 className={styles.title}>{title.toUpperCase()}</h2>
       <div className={styles.items}>
         {
           items.map((item) => (
