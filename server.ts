@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
+import compression from 'compression';
 
 import Stripe from 'stripe';
 
@@ -13,6 +14,7 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const app = express();
 
 app.use(cors());
+app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
