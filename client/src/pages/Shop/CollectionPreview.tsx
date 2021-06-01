@@ -1,7 +1,7 @@
 import styles from 'pages/Shop/CollectionPreview.module.scss';
 import { Link } from 'react-router-dom';
 
-import { Collection } from 'app/inventorySlice';
+import { Collection } from 'app/types';
 
 import CollectionItem from 'pages/Shop/CollectionItem';
 

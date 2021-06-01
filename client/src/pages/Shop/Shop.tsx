@@ -1,23 +1,24 @@
-import { Collection } from 'app/inventorySlice';
-
+import { Collection } from 'app/types';
 import { useQuery } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
 import CollectionPreview from 'pages/Shop/CollectionPreview';
 
 
-const GET_COLLECTIONS = gql`{
-  collections {
-    id
-    title
-    items {
+const GET_COLLECTIONS = gql`
+  {
+    collections {
       id
-      name
-      price
-      imageUrl
+      title
+      items {
+        id
+        name
+        price
+        imageUrl
+      }
     }
   }
-}`;
+`;
 
 const Shop = () => {
   const { data } = useQuery<{ collections: Collection[]; }>(GET_COLLECTIONS);

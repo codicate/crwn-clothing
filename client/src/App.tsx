@@ -5,7 +5,6 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { auth } from 'utils/firebase';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { setCurrentUser, selectCurrentUser } from 'app/userSlice';
-import { fetchCollections, selectCollections } from 'app/inventorySlice';
 
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from 'components/ErrorFallback';
@@ -24,8 +23,6 @@ const App = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchCollections());
-
     const unsubFromAuth = auth.onAuthStateChanged(newUser => {
       dispatch(setCurrentUser(newUser));
     });
@@ -33,7 +30,6 @@ const App = () => {
     return () => unsubFromAuth();
   }, [dispatch]);
 
-  const inventory = useAppSelector(selectCollections);
   const currentUser = useAppSelector(selectCurrentUser);
 
   return (
@@ -52,6 +48,7 @@ const App = () => {
             <Route exact path='/' component={Homepage} />
             <Route exact path='/checkout' component={Checkout} />
             <Route exact path='/shop' component={Shop} />
+            <Route exact path='/shop/:routeName/' component={Collections} />
 
             <Route exact path='/account' >
               {(
@@ -62,19 +59,6 @@ const App = () => {
                 <Account />
               )}
             </Route>
-
-            {
-              inventory.map((collection) => (
-                <Route exact
-                  key={collection.routeName}
-                  path={'/shop/' + collection.routeName}
-                >
-                  <Collections
-                    collection={collection}
-                  />
-                </Route>
-              ))
-            }
           </Suspense>
         </ErrorBoundary>
 
