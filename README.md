@@ -1,6 +1,6 @@
 # CRWN Clothing
 
-[Live](https://codicate.github.io/crwn-clothing/)
+[Live](https://codicate-crwn-clothing.herokuapp.com/)
 
 This project is made from a [tutorial](https://www.udemy.com/course/complete-react-developer-zero-to-mastery/). The tutorial used class components, javascript, and older redux. 
 
@@ -14,7 +14,11 @@ _nothing wrong with the technologies used in the tutorial, but if I can I would 
 - React with hooks
 - Redux with Redux Toolkit, reselect, persist
 - Typescript
-- Sass with module
-- styled-components
-- react-router
 - Firebase
+- Express
+- Stripe
+- react-router
+- axios
+- Sass module
+- styled-components
+- Heroku
