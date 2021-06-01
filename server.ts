@@ -15,12 +15,12 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const app = express();
 
 app.use(cors());
-app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
 if (process.env.NODE_ENV === 'production') {
+  app.use(compression());
   app.use(enforce.HTTPS({ trustProtoHeader: true }));
   app.use(express.static(path.join(__dirname, buildPath)));
 
