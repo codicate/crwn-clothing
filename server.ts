@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import compression from 'compression';
+import enforce from 'express-sslify';
 
 import Stripe from 'stripe';
 
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 if (process.env.NODE_ENV === 'production') {
+  app.use(enforce.HTTPS({ trustProtoHeader: true }));
   app.use(express.static(path.join(__dirname, buildPath)));
 
   app.get('*', (_, res) => {
@@ -34,6 +36,10 @@ if (process.env.NODE_ENV === 'production') {
 
 app.listen(port);
 
+
+app.get('/service-worker.js', (_, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'build', 'service-worker.js'));
+});
 
 app.post('/payment', async (req, res) => {
   try {
