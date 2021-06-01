@@ -37,6 +37,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
+import compression from 'compression';
+import enforce from 'express-sslify';
 import Stripe from 'stripe';
 var buildPath = 'client/build';
 var port = process.env.PORT || 5000;
@@ -46,6 +48,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 if (process.env.NODE_ENV === 'production') {
+    app.use(compression());
+    app.use(enforce.HTTPS({ trustProtoHeader: true }));
     app.use(express.static(path.join(__dirname, buildPath)));
     app.get('*', function (_, res) {
         res.sendFile(path.join(__dirname, buildPath, 'index.html'));
@@ -57,6 +61,9 @@ else {
     });
 }
 app.listen(port);
+app.get('/service-worker.js', function (_, res) {
+    res.sendFile(path.resolve(__dirname, '..', 'build', 'service-worker.js'));
+});
 app.post('/payment', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var stripe, charge, err_1;
     return __generator(this, function (_a) {
