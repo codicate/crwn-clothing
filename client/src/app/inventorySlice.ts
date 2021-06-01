@@ -8,7 +8,7 @@ import { firestore } from 'utils/firebase';
 import { Item } from 'app/cartSlice';
 
 
-interface Collection {
+export interface Collection {
   id: string;
   title: string;
   routeName: string;

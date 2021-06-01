@@ -1,12 +1,7 @@
-import styles from 'pages/Shop/CollectionPage.module.scss';
+import styles from 'pages/Shop/Collections.module.scss';
 
-import { Item } from 'app/cartSlice';
+import { Collection } from 'app/inventorySlice';
 import CollectionItem from 'pages/Shop/CollectionItem';
-
-interface Collection {
-  title: string;
-  items: Item[];
-}
 
 const CollectionPage = ({
   collection: { title, items }
@@ -18,7 +13,7 @@ const CollectionPage = ({
       <h2 className={styles.title}>{title}</h2>
       <div className={styles.items}>
         {
-          items.map((item: Item) => (
+          items.map((item) => (
             <CollectionItem key={item.id} item={item} />
           ))
         }
