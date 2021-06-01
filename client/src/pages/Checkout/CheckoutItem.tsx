@@ -3,6 +3,7 @@ import styles from 'pages/Checkout/CheckoutItem.module.scss';
 import { useAppDispatch } from 'app/hooks';
 import { addItemByOne, removeItemByOne, removeAllItem, Item } from 'app/cartSlice';
 
+
 const CheckoutItem = ({
   item, item: { name, price, imageUrl, quantity }
 }: {
